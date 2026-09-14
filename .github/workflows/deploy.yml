@@ -59,7 +59,7 @@ jobs:
           mv build sitio-app
           mkdir build
           mv sitio-app build/app
-          cp landing/index.html build/index.html
+          cp -r landing/. build/
           test -f build/index.html
           test -f build/app/index.html
           grep -q 'Entrar a la herramienta' build/index.html

@@ -9,6 +9,7 @@
 			content="Visualización interactiva que muestra cómo un Transformer predice la palabra siguiente, con un GPT-2 corriendo en vivo dentro del navegador. Traducción al castellano del Transformer Explainer del Polo Club of Data Science."
 		/>
 		<link rel="icon" href="./app/favicon.png" />
+		<link rel="preload" as="image" href="./fondo.jpg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -19,67 +20,95 @@
 			:root {
 				--tinta: #1e293b;
 				--tinta-suave: #64748b;
-				--borde: #e2e8f0;
-				--fondo: #fbfcfe;
-				--papel: #ffffff;
+				--borde: rgba(148, 163, 184, 0.28);
 				--azul: #2563eb;
 				--violeta: #7c3aed;
-				--verde: #10b981;
-				--rojo: #ef4444;
 			}
 
 			* {
 				box-sizing: border-box;
 			}
 
+			html,
 			body {
 				margin: 0;
-				background:
-					radial-gradient(900px 500px at 12% -8%, #eef2ff 0%, transparent 60%),
-					radial-gradient(800px 460px at 92% 4%, #f5f3ff 0%, transparent 62%),
-					var(--fondo);
+				min-height: 100%;
+			}
+
+			body {
 				color: var(--tinta);
 				font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
 					Arial, sans-serif;
-				line-height: 1.65;
+				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;
+
+				/* El fondo es la herramienta misma, con una frase ya procesada. */
+				background:
+					linear-gradient(rgba(248, 250, 255, 0.62), rgba(248, 250, 255, 0.62)),
+					url("./fondo.jpg") center / cover no-repeat fixed,
+					#f8faff;
+
+				display: grid;
+				place-items: center;
+				padding: 40px 20px;
 			}
 
-			.envoltorio {
-				max-width: 780px;
-				margin: 0 auto;
-				padding: 0 20px;
+			/* ------------------------------------------------------- la tarjeta */
+
+			main {
+				width: min(660px, 100%);
+
+				/* Mismo lenguaje que las tarjetas del manual de la app: vidrio
+				   esmerilado, borde redondeado suave y dos sombras superpuestas.
+				   Va mas opaca que aquellas porque el fondo de aca tiene color. */
+				background: rgba(255, 255, 255, 0.86);
+				backdrop-filter: blur(14px);
+				-webkit-backdrop-filter: blur(14px);
+				border: 1px solid rgba(255, 255, 255, 0.7);
+				border-radius: 14px;
+				box-shadow:
+					0 12px 32px rgba(30, 41, 59, 0.14),
+					0 4px 8px rgba(30, 41, 59, 0.06);
+				padding: clamp(28px, 5vw, 46px);
+				animation: entrada 0.5s ease both;
 			}
 
-			/* ---------------------------------------------------------- portada */
-
-			header {
-				padding-block: 72px 8px;
+			@keyframes entrada {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
 			}
+
+			@media (prefers-reduced-motion: reduce) {
+				main {
+					animation: none;
+				}
+			}
+
+			/* ------------------------------------------------------------ marca */
 
 			.marca {
 				font-family: "Jersey 10", ui-monospace, monospace;
-				font-size: clamp(2.6rem, 8vw, 4.2rem);
+				font-size: clamp(2.4rem, 7.5vw, 3.6rem);
 				line-height: 1;
-				letter-spacing: 0.01em;
 				margin: 0;
-				background: linear-gradient(92deg, var(--azul), var(--violeta) 70%);
+				background: linear-gradient(92deg, var(--azul), var(--violeta) 72%);
 				-webkit-background-clip: text;
 				background-clip: text;
 				color: transparent;
 			}
 
 			.subtitulo {
-				font-size: 1.05rem;
+				font-size: 0.95rem;
+				font-weight: 600;
 				color: var(--tinta-suave);
-				margin: 6px 0 0;
-				font-weight: 500;
+				margin: 4px 0 0;
 			}
 
 			.bajada {
-				font-size: 1.18rem;
-				margin: 26px 0 0;
-				max-width: 60ch;
+				font-size: 1.1rem;
+				margin: 22px 0 0;
 			}
 
 			.bajada strong {
@@ -92,8 +121,8 @@
 				display: flex;
 				flex-wrap: wrap;
 				align-items: center;
-				gap: 16px;
-				margin-top: 32px;
+				gap: 14px;
+				margin-top: 26px;
 			}
 
 			.entrar {
@@ -101,140 +130,102 @@
 				background: linear-gradient(92deg, var(--azul), var(--violeta));
 				color: #fff;
 				text-decoration: none;
-				font-size: 1.06rem;
+				font-size: 1.05rem;
 				font-weight: 600;
-				padding: 14px 30px;
-				border-radius: 10px;
-				box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25);
+				padding: 13px 30px;
+				border-radius: 9px;
+				box-shadow: 0 5px 18px rgba(79, 70, 229, 0.3);
 				transition: transform 0.15s ease, box-shadow 0.15s ease;
 			}
 
-			.entrar:hover {
+			.entrar:hover,
+			.entrar:focus-visible {
 				transform: translateY(-1px);
-				box-shadow: 0 10px 26px rgba(79, 70, 229, 0.32);
+				box-shadow: 0 9px 24px rgba(79, 70, 229, 0.38);
 			}
 
-			.nota-boton {
-				font-size: 0.9rem;
+			.pista {
+				font-size: 0.88rem;
 				color: var(--tinta-suave);
 			}
 
-			/* ---------------------------------------------------------- secciones */
+			/* ------------------------------------------------------------ pasos */
 
-			section {
-				padding-block: 44px 0;
+			.separador {
+				border: 0;
+				border-top: 1px solid var(--borde);
+				margin: 30px 0 26px;
 			}
 
-			h2 {
-				font-size: 1.28rem;
-				margin: 0 0 16px;
-				letter-spacing: -0.01em;
+			ol {
+				list-style: none;
+				counter-reset: paso;
+				margin: 0;
+				padding: 0;
+				display: grid;
+				gap: 13px;
 			}
 
-			p {
-				margin: 0 0 14px;
+			ol li {
+				counter-increment: paso;
+				padding-left: 34px;
+				position: relative;
+				font-size: 0.97rem;
+			}
+
+			ol li::before {
+				content: counter(paso);
+				position: absolute;
+				left: 0;
+				top: 2px;
+				width: 22px;
+				height: 22px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, var(--azul), var(--violeta));
+				color: #fff;
+				font-size: 0.76rem;
+				font-weight: 700;
+				display: grid;
+				place-items: center;
+			}
+
+			/* ----------------------------------------------------- letra chica */
+
+			.chica {
+				font-size: 0.89rem;
+				color: var(--tinta-suave);
+				margin: 26px 0 0;
+			}
+
+			.chica strong {
+				color: var(--tinta);
+				font-weight: 600;
+			}
+
+			footer {
+				margin-top: 24px;
+				padding-top: 20px;
+				border-top: 1px solid var(--borde);
+				font-size: 0.83rem;
+				color: var(--tinta-suave);
+			}
+
+			footer p {
+				margin: 0 0 8px;
+			}
+
+			footer p:last-child {
+				margin-bottom: 0;
 			}
 
 			a {
 				color: var(--azul);
 			}
 
-			hr {
-				border: 0;
-				border-top: 1px solid var(--borde);
-				margin: 52px 0 0;
-			}
-
-			/* --------------------------------------------------------- los pasos */
-
-			ol.pasos {
-				list-style: none;
-				counter-reset: paso;
-				padding: 0;
-				margin: 0;
-				display: grid;
-				gap: 12px;
-			}
-
-			ol.pasos li {
-				counter-increment: paso;
-				background: var(--papel);
-				border: 1px solid var(--borde);
-				border-radius: 10px;
-				padding: 16px 18px 16px 56px;
-				position: relative;
-			}
-
-			ol.pasos li::before {
-				content: counter(paso);
-				position: absolute;
-				left: 18px;
-				top: 16px;
-				width: 24px;
-				height: 24px;
-				border-radius: 50%;
-				background: var(--azul);
-				color: #fff;
-				font-size: 0.82rem;
-				font-weight: 700;
-				display: grid;
-				place-items: center;
-			}
-
-			/* ------------------------------------------------------------ aviso */
-
-			.aviso {
-				background: #fffbeb;
-				border: 1px solid #fde68a;
-				border-radius: 10px;
-				padding: 16px 18px;
-			}
-
-			.aviso p:last-child {
-				margin-bottom: 0;
-			}
-
-			/* ------------------------------------------------------- glosario */
-
-			.glosario {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 7px;
-				margin: 14px 0 0;
-				padding: 0;
-				list-style: none;
-			}
-
-			.glosario li {
-				font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-				font-size: 0.84rem;
-				background: var(--papel);
-				border: 1px solid var(--borde);
-				border-radius: 6px;
-				padding: 3px 9px;
-				color: var(--tinta-suave);
-			}
-
-			/* ------------------------------------------------------------ pie */
-
-			footer {
-				padding-block: 34px 64px;
-				font-size: 0.93rem;
-				color: var(--tinta-suave);
-			}
-
-			footer p {
-				margin: 0 0 10px;
-			}
-
-			footer .licencia {
-				font-size: 0.86rem;
-				margin-top: 18px;
-			}
-
 			@media (max-width: 520px) {
-				header {
-					padding-block: 48px 4px;
+				body {
+					background-attachment: scroll;
+					padding: 20px 14px;
 				}
 				.entrar {
 					width: 100%;
@@ -244,130 +235,73 @@
 		</style>
 	</head>
 	<body>
-		<div class="envoltorio">
-			<header>
-				<h1 class="marca">Transformer Explainer</h1>
-				<p class="subtitulo">en castellano</p>
+		<main>
+			<h1 class="marca">Transformer Explainer</h1>
+			<p class="subtitulo">en castellano</p>
 
-				<p class="bajada">
-					Una visualización interactiva de cómo un modelo de lenguaje decide la palabra
-					siguiente. No es una animación grabada: adentro corre un
-					<strong>GPT-2 de verdad</strong>, dentro de tu navegador, con el texto que vos
-					escribas.
-				</p>
+			<p class="bajada">
+				Cómo un modelo de lenguaje decide la palabra siguiente, paso a paso y con todas las
+				piezas a la vista. No es una animación grabada: adentro corre un
+				<strong>GPT-2 de verdad</strong>, en tu navegador, con el texto que vos escribas.
+			</p>
 
-				<div class="acciones">
-					<a class="entrar" href="./app/">Entrar a la herramienta</a>
-					<span class="nota-boton">Se abre en esta misma pestaña</span>
-				</div>
-			</header>
+			<div class="acciones">
+				<a class="entrar" href="./app/">Entrar a la herramienta</a>
+				<span class="pista">Lo que se ve atrás es, justamente, la herramienta</span>
+			</div>
 
-			<section>
-				<h2>Qué vas a ver</h2>
-				<p>
-					El recorrido completo, de punta a punta: el texto se parte en
-					<em>tokens</em>, cada uno se convierte en un vector, esos vectores se miran entre
-					sí en la <em>self-attention</em>, pasan doce veces por el mismo bloque, y al final
-					salen las probabilidades de cada palabra posible.
-				</p>
-				<p>
-					Todo es manipulable. Podés abrir cada bloque para ver las matrices por dentro,
-					cambiar la temperatura y ver cómo se aplana la distribución, o pasar de una
-					<em>head</em> de atención a otra y comparar en qué se fija cada una.
-				</p>
-			</section>
+			<hr class="separador" />
 
-			<section>
-				<h2>Cómo usarlo</h2>
-				<ol class="pasos">
-					<li>
-						Escribí una frase en el campo de arriba, o elegí una de los
-						<strong>Ejemplos</strong>. Tiene que ser en inglés: el modelo es GPT-2 y no
-						entiende castellano.
-					</li>
-					<li>
-						Apretá <strong>Generar</strong>. El modelo predice el token siguiente y lo
-						agrega al texto.
-					</li>
-					<li>
-						Seguí el <strong>manual</strong>, el panel de 20 tarjetas abajo a la derecha.
-						Va explicando cada etapa y resaltando la parte del diagrama de la que habla.
-					</li>
-				</ol>
-			</section>
+			<ol>
+				<li>
+					Escribí una frase, o elegí una de los <strong>Ejemplos</strong>. En inglés: el
+					modelo es GPT-2 y no entiende castellano.
+				</li>
+				<li>
+					Apretá <strong>Generar</strong> y mirá el recorrido — tokens, embeddings,
+					self-attention, doce bloques, probabilidades.
+				</li>
+				<li>
+					Seguí el <strong>manual</strong>: 20 tarjetas que explican cada etapa y resaltan
+					la parte del diagrama de la que hablan.
+				</li>
+			</ol>
 
-			<section>
-				<h2>Antes de entrar</h2>
-				<div class="aviso">
-					<p>
-						<strong>La primera visita descarga unos 600 MB</strong> — son los pesos de
-						GPT-2, que se bajan una sola vez y quedan en la caché del navegador. Mientras
-						tanto podés usar los ejemplos, que vienen precalculados.
-					</p>
-					<p>
-						Anda mejor en una computadora de escritorio o notebook: el diagrama es ancho y
-						en un celular no entra.
-					</p>
-				</div>
-			</section>
-
-			<section>
-				<h2>Qué quedó en inglés, a propósito</h2>
-				<p>
-					El <strong>modelo</strong>, porque GPT-2 fue entrenado en inglés: los tokens, las
-					predicciones y los ejemplos son en ese idioma. También el artículo largo del pie
-					de página, y estos términos, que se dejaron sin traducir para que los reconozcas
-					después en la bibliografía:
-				</p>
-				<ul class="glosario">
-					<li>token</li>
-					<li>embedding</li>
-					<li>self-attention</li>
-					<li>head</li>
-					<li>Query / Key / Value</li>
-					<li>softmax</li>
-					<li>logit</li>
-					<li>dropout</li>
-					<li>top-k</li>
-					<li>top-p</li>
-					<li>MLP</li>
-					<li>GELU</li>
-				</ul>
-			</section>
-
-			<hr />
+			<p class="chica">
+				<strong>La primera visita descarga unos 600 MB</strong> — los pesos de GPT-2, que
+				quedan en la caché del navegador. Mientras tanto andan los ejemplos, que vienen
+				precalculados. Conviene entrar desde una computadora: el diagrama es ancho. Los
+				términos técnicos (<em>token, embedding, self-attention, Query/Key/Value, softmax,
+				logit…</em>) quedaron sin traducir a propósito, para que los reconozcas después en la
+				bibliografía.
+			</p>
 
 			<footer>
 				<p>
-					Esto es una traducción. El
-					<a href="https://poloclub.github.io/transformer-explainer/" target="_blank"
-						rel="noopener">Transformer Explainer original</a
+					Traducción del
+					<a
+						href="https://poloclub.github.io/transformer-explainer/"
+						target="_blank"
+						rel="noopener">Transformer Explainer</a
 					>
-					lo hicieron Aeree Cho, Grace C. Kim, Alexander Karpekov, Alec Helbling, Jay Wang,
-					Seongmin Lee, Benjamin Hoover y Polo Chau, en el
-					<a href="https://poloclub.github.io/" target="_blank" rel="noopener"
-						>Polo Club of Data Science</a
-					>
-					del Georgia Institute of Technology.
+					de Aeree Cho, Grace C. Kim, Alexander Karpekov, Alec Helbling, Jay Wang, Seongmin
+					Lee, Benjamin Hoover y Polo Chau — Polo Club of Data Science, Georgia Tech.
 				</p>
 				<p>
-					El paper:
-					<a href="https://dl.acm.org/doi/pdf/10.1145/3772318.3791725" target="_blank"
-						rel="noopener"
-						>Transformer Explainer: Learning LLM Transformers with Interactive Visual
-						Explanation and Experimentation</a
-					>, CHI 2026.
-				</p>
-				<p class="licencia">
-					Traducción al castellano mantenida de forma independiente
-					(<a
+					<a
+						href="https://dl.acm.org/doi/pdf/10.1145/3772318.3791725"
+						target="_blank"
+						rel="noopener">El paper (CHI 2026)</a
+					>
+					·
+					<a
 						href="https://github.com/dimacio/transformer-explainer-es"
 						target="_blank"
-						rel="noopener">código</a
-					>). Software bajo licencia MIT, igual que el original; el aviso de copyright de
-					los autores se conserva sin cambios.
+						rel="noopener">El código de esta traducción</a
+					>
+					· Licencia MIT, igual que el original
 				</p>
 			</footer>
-		</div>
+		</main>
 	</body>
 </html>
