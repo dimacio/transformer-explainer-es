@@ -36,7 +36,9 @@ ENTRADA = ((BI[0]+APEX[0])/2, (BI[1]+APEX[1])/2)
 
 # n_azul > n_verde > n_rojo: el orden real. La separacion esta exagerada
 # (en vidrio real seria ~0.01 y el abanico ~1 grado, invisible en un dibujo).
-VIDRIOS = [("Key", "#ef4444", 1.47), ("Value", "#22c55e", 1.59), ("Query", "#3b82f6", 1.71)]
+# Mismos tonos que la app pero un escalon mas claros, para no romper el
+# pastel de la pagina: rojo/verde/azul 400 en vez de 500.
+VIDRIOS = [("Key", "#f87171", 1.47), ("Value", "#4ade80", 1.59), ("Query", "#60a5fa", 1.71)]
 X_PANT = 545.0
 
 rayos = []
@@ -52,7 +54,7 @@ for nombre, color, n in VIDRIOS:
 
 # --- panel de entrada -------------------------------------------------------
 LADO = 116.0
-x_borde = 128.0
+x_borde = 196.0
 t = (x_borde - ENTRADA[0]) / D_IN[0]
 INICIO = (ENTRADA[0] + t*D_IN[0], ENTRADA[1] + t*D_IN[1])
 PX, PY = x_borde - LADO, INICIO[1] - LADO/2
@@ -77,40 +79,30 @@ w('  <title id="tit-prisma">Las letras Q, K y V superpuestas entran a un prisma 
 w('  <defs>')
 w('    <linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="%s" y1="%s" x2="%s" y2="%s">'
   % (f(INICIO[0]), f(INICIO[1]), f(ENTRADA[0]), f(ENTRADA[1])))
-w('      <stop offset="0" stop-color="#e2e8f0" /><stop offset="1" stop-color="#cbd5e1" />')
+w('      <stop offset="0" stop-color="#e6ecf4" /><stop offset="1" stop-color="#c9d4e2" />')
 w('    </linearGradient>')
 w('  </defs>')
 
-# pantalla de proyeccion (primero, va por detras)
-w('  <rect x="%s" y="%s" width="%s" height="%s" rx="10" fill="#0f172a" />'
-  % (f(X_PANT), f(SY0), f(SX1 - X_PANT), f(SY1 - SY0)))
-
 # panel de entrada: las tres letras superpuestas, mezcladas en modo aditivo
-w('  <g style="isolation: isolate">')
-w('    <rect x="%s" y="%s" width="%s" height="%s" rx="10" fill="#0f172a" />'
-  % (f(PX), f(PY), f(LADO), f(LADO)))
+# Entrada: las tres letras superpuestas, en triangulo, translucidas. Sobre
+# fondo claro no se puede hacer suma aditiva (screen sobre blanco da blanco),
+# asi que los cruces se ven por transparencia y no por mezcla de luz.
 cx_p, cy_p = PX + LADO/2, PY + LADO/2
-# screen sobre fondo negro == suma aditiva: rojo+verde=amarillo, rojo+azul=magenta,
-# verde+azul=cian, y los tres juntos dan blanco.
-# Los tres centros sobre una circunferencia chica, como el diagrama de Venn
-# clasico de RGB: asi cada par se solapa y hay una zona donde se solapan los
-# tres. Con screen sobre negro eso da amarillo, magenta, cian y blanco.
 RADIO = 13.0
 import math as _m
-_pos = [("K", "#ef4444", 90.0), ("V", "#22c55e", 210.0), ("Q", "#3b82f6", 330.0)]
+_pos = [("K", VIDRIOS[0][1], 90.0), ("V", VIDRIOS[1][1], 210.0), ("Q", VIDRIOS[2][1], 330.0)]
 for letra, color, ang in _pos:
     dx = RADIO * _m.cos(_m.radians(ang))
     dy = -RADIO * _m.sin(_m.radians(ang))
-    w('    <text x="%s" y="%s" class="letra" fill="%s" style="mix-blend-mode: screen">%s</text>'
+    w('  <text x="%s" y="%s" class="letra" fill="%s" opacity="0.72">%s</text>'
       % (f(cx_p + dx), f(cy_p + dy), color, letra))
-w('  </g>')
 
 # haz de entrada
 w('  <path d="M%s %s L%s %s" stroke="url(#haz)" stroke-width="11" stroke-linecap="round" fill="none" />'
   % (f(INICIO[0]), f(INICIO[1]), f(ENTRADA[0]), f(ENTRADA[1])))
 
 # cuerpo del prisma
-w('  <path d="M%s %s L%s %s L%s %s Z" fill="rgba(255,255,255,.5)" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round" />'
+w('  <path d="M%s %s L%s %s L%s %s Z" fill="rgba(255,255,255,.35)" stroke="#b8c4d4" stroke-width="2" stroke-linejoin="round" />'
   % (f(APEX[0]), f(APEX[1]), f(BD[0]), f(BD[1]), f(BI[0]), f(BI[1])))
 
 # rayos: tramo interno + tramo de salida, y la letra proyectada
