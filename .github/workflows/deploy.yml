@@ -25,9 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Node 24 a proposito: el package-lock.json lo genera 'publicar.sh' en la
+      # maquina de uno, con el npm que traiga el Node instalado ahi. npm 10 y 11
+      # arman el arbol de dependencias distinto y 'npm ci' rechaza el lockfile
+      # del otro. Node 24 trae npm 11, que es lo que corre hoy en local.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       # npm ci en vez de npm install: usa el lockfile tal cual y falla si esta
