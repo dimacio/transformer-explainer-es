@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Guía de estudio — Transformers</title>
+		<meta
+			name="description"
+			content="Guía de estudio del Transformer: qué mira cada parte de la visualización, etapa por etapa, con capturas de la herramienta."
+		/>
+		<link rel="icon" href="../app/favicon.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--tinta: #1e293b;
+				--tinta-suave: #64748b;
+				--borde: #e4e9f2;
+				--azul: #2563eb;
+				--violeta: #7c3aed;
+				--q: #3b82f6;
+				--k: #ef4444;
+				--v: #22c55e;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				color: var(--tinta);
+				font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+					Arial, sans-serif;
+				line-height: 1.68;
+				-webkit-font-smoothing: antialiased;
+				background:
+					radial-gradient(900px 520px at 10% -6%, #eef2ff 0%, transparent 58%),
+					radial-gradient(760px 460px at 94% 2%, #f5f3ff 0%, transparent 60%),
+					#fbfcfe;
+			}
+
+			.envoltorio {
+				max-width: 880px;
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+
+			/* ---------------------------------------------------------- encabezado */
+
+			header {
+				padding-block: 56px 0;
+			}
+
+			.volver {
+				font-size: 0.9rem;
+				color: var(--tinta-suave);
+				text-decoration: none;
+			}
+
+			.volver:hover {
+				color: var(--azul);
+			}
+
+			h1 {
+				font-family: "Jersey 10", ui-monospace, monospace;
+				font-size: clamp(2.6rem, 7vw, 3.8rem);
+				line-height: 1;
+				margin: 14px 0 0;
+				background: linear-gradient(92deg, var(--azul), var(--violeta) 72%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+			.bajada {
+				font-size: 1.1rem;
+				margin: 18px 0 0;
+				max-width: 62ch;
+			}
+
+			/* -------------------------------------------------------------- índice */
+
+			nav {
+				margin-top: 32px;
+				background: #fff;
+				border: 1px solid var(--borde);
+				border-radius: 12px;
+				padding: 20px 24px;
+			}
+
+			nav p {
+				margin: 0 0 10px;
+				font-size: 0.82rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--tinta-suave);
+			}
+
+			nav ol {
+				margin: 0;
+				padding-left: 20px;
+				columns: 2;
+				column-gap: 28px;
+				font-size: 0.96rem;
+			}
+
+			nav li {
+				margin-bottom: 3px;
+				break-inside: avoid;
+			}
+
+			/* ------------------------------------------------------------ secciones */
+
+			section {
+				margin-top: 48px;
+				background: #fff;
+				border: 1px solid var(--borde);
+				border-radius: 14px;
+				padding: clamp(22px, 4vw, 36px);
+				scroll-margin-top: 20px;
+			}
+
+			h2 {
+				font-size: 1.42rem;
+				margin: 0 0 4px;
+				letter-spacing: -0.01em;
+			}
+
+			.etapa {
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--violeta);
+				margin: 0;
+			}
+
+			h3 {
+				font-size: 1.02rem;
+				margin: 28px 0 8px;
+			}
+
+			p {
+				margin: 0 0 14px;
+			}
+
+			a {
+				color: var(--azul);
+			}
+
+			/* --------------------------------------------------------------- figuras */
+
+			figure {
+				margin: 22px 0 6px;
+			}
+
+			figure img {
+				display: block;
+				width: 100%;
+				height: auto;
+				border: 1px solid var(--borde);
+				border-radius: 10px;
+				background: #fff;
+			}
+
+			figure img.angosta {
+				max-width: 330px;
+				margin-inline: auto;
+			}
+
+			figcaption {
+				font-size: 0.86rem;
+				color: var(--tinta-suave);
+				margin-top: 9px;
+				text-align: center;
+			}
+
+			/* --------------------------------------------------------- qué mirar */
+
+			.mirar {
+				background: #f7f9fd;
+				border: 1px solid var(--borde);
+				border-radius: 10px;
+				padding: 16px 20px;
+				margin: 20px 0 0;
+			}
+
+			.mirar p.tit {
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--tinta-suave);
+				margin: 0 0 8px;
+			}
+
+			.mirar ul {
+				margin: 0;
+				padding-left: 18px;
+				font-size: 0.95rem;
+			}
+
+			.mirar li {
+				margin-bottom: 6px;
+			}
+
+			.mirar li:last-child {
+				margin-bottom: 0;
+			}
+
+			/* ------------------------------------------------------------ preguntas */
+
+			.preguntas {
+				border-left: 3px solid var(--violeta);
+				padding: 2px 0 2px 18px;
+				margin: 24px 0 0;
+			}
+
+			.preguntas p.tit {
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--violeta);
+				margin: 0 0 8px;
+			}
+
+			.preguntas ol {
+				margin: 0;
+				padding-left: 18px;
+				font-size: 0.95rem;
+				color: var(--tinta-suave);
+			}
+
+			.preguntas li {
+				margin-bottom: 6px;
+			}
+
+			/* ---------------------------------------------------------------- datos */
+
+			dl.datos {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 6px 18px;
+				margin: 18px 0 0;
+				font-size: 0.95rem;
+				align-items: baseline;
+			}
+
+			dl.datos dt {
+				font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+				font-size: 0.88rem;
+				color: var(--violeta);
+				white-space: nowrap;
+			}
+
+			dl.datos dd {
+				margin: 0;
+				color: var(--tinta-suave);
+			}
+
+			code {
+				font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+				font-size: 0.88em;
+				background: #f1f5f9;
+				padding: 1px 5px;
+				border-radius: 4px;
+			}
+
+			.q { color: var(--q); font-weight: 600; }
+			.k { color: var(--k); font-weight: 600; }
+			.v { color: var(--v); font-weight: 600; }
+
+			/* -------------------------------------------------------------- glosario */
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 0.94rem;
+				margin-top: 14px;
+			}
+
+			th, td {
+				text-align: left;
+				padding: 9px 10px;
+				border-bottom: 1px solid var(--borde);
+				vertical-align: top;
+			}
+
+			th {
+				font-size: 0.78rem;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				color: var(--tinta-suave);
+			}
+
+			td:first-child {
+				font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+				font-size: 0.88rem;
+				white-space: nowrap;
+				width: 1%;
+			}
+
+			.tabla-scroll {
+				overflow-x: auto;
+			}
+
+			/* ------------------------------------------------------------------ pie */
+
+			footer {
+				padding-block: 40px 72px;
+				font-size: 0.9rem;
+				color: var(--tinta-suave);
+				text-align: center;
+			}
+
+			.abrir {
+				display: inline-block;
+				background: linear-gradient(92deg, var(--azul), var(--violeta));
+				color: #fff;
+				text-decoration: none;
+				font-weight: 600;
+				padding: 12px 28px;
+				border-radius: 9px;
+				margin-bottom: 22px;
+			}
+
+			@media (max-width: 620px) {
+				nav ol { columns: 1; }
+				header { padding-block: 32px 0; }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="envoltorio">
+			<header>
+				<a class="volver" href="../">← Transformers</a>
+				<h1>Guía de estudio</h1>
+				<p class="bajada">
+					Qué es cada cosa de las que se ven en la herramienta, etapa por etapa. Conviene
+					leerla con la visualización abierta al lado: cada sección dice
+					<strong>qué mirar</strong> y dónde.
+				</p>
+
+				<nav>
+					<p>Contenido</p>
+					<ol>
+						<li><a href="#recorrido">El recorrido completo</a></li>
+						<li><a href="#embedding">Tokenización y embedding</a></li>
+						<li><a href="#atencion">Multi-head self-attention</a></li>
+						<li><a href="#head">Dentro de una head</a></li>
+						<li><a href="#mlp">El MLP</a></li>
+						<li><a href="#probabilidades">Logits y probabilidades</a></li>
+						<li><a href="#numeros">Los números de GPT-2</a></li>
+						<li><a href="#glosario">Glosario</a></li>
+					</ol>
+				</nav>
+			</header>
+
+			<!-- ============================================ 1 -->
+			<section id="recorrido">
+				<p class="etapa">Etapa 0</p>
+				<h2>El recorrido completo</h2>
+
+				<p>
+					La pantalla se lee de izquierda a derecha y es una sola cosa: el camino que hace un
+					texto hasta convertirse en una predicción. Entra una frase por arriba y sale, a la
+					derecha, una lista de palabras candidatas con su probabilidad.
+				</p>
+
+				<figure>
+					<img src="./vista-general.jpg" alt="Vista completa de la herramienta, del embedding a las probabilidades" />
+					<figcaption>
+						De izquierda a derecha: Embedding · Multi-head self-attention · MLP · los otros
+						11 bloques · Probabilidades.
+					</figcaption>
+				</figure>
+
+				<p>
+					Lo que está entre <em>Multi-head self-attention</em> y <em>MLP</em> es
+					<strong>un</strong> bloque Transformer. Después viene el cartel «otros 11 bloques
+					Transformer idénticos»: eso es literal — la misma estructura, repetida doce veces,
+					cada una con sus propios pesos.
+				</p>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Los <strong>hilos blancos</strong> que cruzan de lado a lado: son los mismos
+							siete tokens, que nunca se mezclan entre filas salvo dentro de la atención.
+						</li>
+						<li>
+							Las líneas grises que dicen <strong>Residual</strong>: rodean la atención y el
+							MLP sin pasar por adentro. Volvemos a eso en la sección del MLP.
+						</li>
+						<li>
+							Arriba a la derecha, <strong>Temperatura</strong> y <strong>Muestreo</strong>:
+							no cambian el modelo, solo cómo se elige entre sus predicciones.
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- ============================================ 2 -->
+			<section id="embedding">
+				<p class="etapa">Etapa 1</p>
+				<h2>Tokenización y embedding</h2>
+
+				<p>
+					El modelo no ve letras ni palabras: ve <strong>números</strong>. Esta primera
+					columna hace la conversión en dos pasos.
+				</p>
+
+				<p>
+					Primero la <strong>tokenización</strong> parte el texto en piezas. No coinciden con
+					las palabras: en la captura, <code>empowers</code> se parte en <code>em</code> +
+					<code>powers</code>. Cada pieza tiene un número de identificación dentro de un
+					vocabulario de 50.257 entradas.
+				</p>
+
+				<figure>
+					<img class="angosta" src="./embedding.jpg" alt="Columna de tokenización y embedding" />
+					<figcaption>La columna de entrada: un token por fila.</figcaption>
+				</figure>
+
+				<p>
+					Después, el <strong>embedding de token</strong> cambia cada ID por un vector de 768
+					números, buscándolo en una tabla que se aprendió durante el entrenamiento. Y como
+					ese vector es el mismo sin importar dónde aparezca la palabra, se le suma un
+					<strong>embedding posicional</strong>: otro vector de 768 números que depende
+					únicamente de la posición.
+				</p>
+
+				<figure>
+					<img src="./embedding-detalle.jpg" alt="Vista expandida del embedding, con el ID del token, el embedding y la codificación posicional" />
+					<figcaption>
+						La misma etapa, expandida con la lupa (⊕). Se ve la suma:
+						embedding de token + posición = el vector que entra al primer bloque.
+					</figcaption>
+				</figure>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Que la suma es literalmente <strong>elemento a elemento</strong>: dos vectores
+							de 768 entran y sale uno de 768. No se concatenan.
+						</li>
+						<li>
+							Que la fila de <code>em</code> y la de <code>powers</code> son independientes.
+							Nada las junta todavía: eso pasa recién en la atención.
+						</li>
+					</ul>
+				</div>
+
+				<div class="preguntas">
+					<p class="tit">Para comprobar</p>
+					<ol>
+						<li>¿Por qué hace falta sumar la posición, si el orden ya está en la pantalla?</li>
+						<li>Si escribís la misma palabra dos veces, ¿los dos vectores que salen de esta etapa son iguales?</li>
+					</ol>
+				</div>
+			</section>
+
+			<!-- ============================================ 3 -->
+			<section id="atencion">
+				<p class="etapa">Etapa 2</p>
+				<h2>Multi-head self-attention</h2>
+
+				<p>
+					Acá es donde los tokens por fin <strong>se miran entre sí</strong>. Es la única
+					parte del modelo donde la información pasa de una fila a otra.
+				</p>
+
+				<p>
+					Cada vector se transforma en tres vectores nuevos, multiplicándolo por tres matrices
+					de pesos distintas:
+				</p>
+
+				<dl class="datos">
+					<dt class="q">Query</dt>
+					<dd>lo que este token <em>está buscando</em> en los demás.</dd>
+					<dt class="k">Key</dt>
+					<dd>lo que este token <em>ofrece</em> para que lo encuentren.</dd>
+					<dt class="v">Value</dt>
+					<dd>la información que aporta si efectivamente lo atienden.</dd>
+				</dl>
+
+				<p style="margin-top: 14px">
+					La metáfora que ayuda: cada token levanta la mano con un cartel (<span class="k">Key</span>)
+					y a la vez busca carteles (<span class="q">Query</span>). Donde una búsqueda coincide
+					con un cartel, se copia lo que ese token tenía para aportar (<span class="v">Value</span>).
+				</p>
+
+				<figure>
+					<img src="./atencion.jpg" alt="La etapa de atención completa, con Query, Key, Value, la matriz de atención y la salida" />
+					<figcaption>
+						Las tres columnas de colores a la izquierda son <span class="q">Q</span>,
+						<span class="k">K</span> y <span class="v">V</span> para cada token.
+					</figcaption>
+				</figure>
+
+				<p>
+					La pila de hojas de atrás no es decorativa: son las <strong>12 heads</strong>. Cada
+					una hace todo esto por separado, con sus propios pesos, mirando cosas distintas —
+					una puede seguir concordancias de género, otra referencias lejanas. Abajo dice
+					«Head 1 de 12» y se puede pasar de una a otra con las flechas.
+				</p>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Que los colores no son arbitrarios: <span class="q">Query</span> azul,
+							<span class="k">Key</span> rojo, <span class="v">Value</span> verde, en toda
+							la herramienta.
+						</li>
+						<li>
+							Que cada head trabaja con vectores <strong>más chicos</strong>: los 768 números
+							se reparten en 12 pedazos de 64. Las heads no repiten el trabajo, se lo dividen.
+						</li>
+						<li>
+							Pasá de la head 1 a la 5 y mirá cómo cambia la matriz: son patrones distintos
+							sobre el mismo texto.
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- ============================================ 4 -->
+			<section id="head">
+				<p class="etapa">Etapa 2 · detalle</p>
+				<h2>Dentro de una head</h2>
+
+				<p>
+					La cuadrícula del medio es la <strong>matriz de atención</strong>: una fila por
+					token que mira, una columna por token mirado. Cuanto más oscuro el punto, más peso
+					le da esa fila a esa columna.
+				</p>
+
+				<figure>
+					<img src="./multi-head.jpg" alt="Una head de atención en detalle, con la matriz triangular" />
+					<figcaption>Una head sola, con su matriz de atención.</figcaption>
+				</figure>
+
+				<p>
+					Se arma en tres pasos. <strong>Producto punto</strong>: se multiplica cada
+					<span class="q">Query</span> por cada <span class="k">Key</span> número a número y
+					se suma, dando un puntaje de afinidad. <strong>Máscara</strong>: se tapan los tokens
+					que vienen <em>después</em>, porque el modelo predice hacia adelante y no puede
+					espiar el futuro. <strong>Softmax</strong>: los puntajes se convierten en
+					proporciones que suman 1 en cada fila.
+				</p>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Que la matriz es <strong>triangular</strong>: la mitad de arriba a la derecha
+							está vacía. Eso es la máscara, y es la razón de que el modelo pueda escribir de
+							izquierda a derecha.
+						</li>
+						<li>
+							Que la primera fila tiene un solo punto oscuro: el primer token no tiene nada
+							anterior que mirar, así que se atiende únicamente a sí mismo.
+						</li>
+						<li>
+							Que cada fila suma 1. Si un token le presta mucha atención a otro, se la está
+							quitando al resto.
+						</li>
+					</ul>
+				</div>
+
+				<div class="preguntas">
+					<p class="tit">Para comprobar</p>
+					<ol>
+						<li>¿Qué pasaría si se sacara la máscara? ¿Por qué el modelo no podría entrenarse así?</li>
+						<li>Si una fila tuviera todos los valores iguales, ¿qué estaría haciendo ese token?</li>
+					</ol>
+				</div>
+			</section>
+
+			<!-- ============================================ 5 -->
+			<section id="mlp">
+				<p class="etapa">Etapa 3</p>
+				<h2>El MLP</h2>
+
+				<p>
+					Después de la atención, cada token pasa por un <strong>perceptrón multicapa</strong>
+					— y acá vuelven a estar solos: el MLP procesa cada fila por separado, sin mirar a las
+					demás.
+				</p>
+
+				<figure>
+					<img src="./mlp.jpg" alt="La etapa del MLP, con la expansión y la compresión" />
+					<figcaption>El MLP: se expande a 3072, se aplica GELU y se vuelve a 768.</figcaption>
+				</figure>
+
+				<p>
+					Son dos capas lineales con una <strong>activación no lineal</strong> en el medio. La
+					primera expande el vector de 768 a 3072 números — cuatro veces más espacio. Ahí se
+					aplica <strong>GELU</strong>, que deja pasar entero lo que es grande y solo
+					parcialmente lo chico. La segunda capa comprime de vuelta a 768.
+				</p>
+
+				<p>
+					Sin esa no linealidad, apilar doce bloques no serviría de nada: la composición de
+					transformaciones lineales es otra transformación lineal, y el modelo entero
+					colapsaría a una sola matriz.
+				</p>
+
+				<h3>Residual y normalización</h3>
+
+				<p>
+					Las líneas grises que rodean la atención y el MLP son las <strong>conexiones
+					residuales</strong>: a la salida de cada bloque se le suma su propia entrada. Así,
+					cada bloque no tiene que reconstruir toda la información, solo agregar lo que
+					aporta. Y la <strong>normalización por capa</strong> reescala los valores antes de
+					cada etapa, para que no se disparen al atravesar doce bloques.
+				</p>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Que la fila de cada token atraviesa el MLP sin cruzarse con las otras. La
+							atención mezcla; el MLP refina.
+						</li>
+						<li>
+							Que el residual <strong>esquiva</strong> el bloque. Si borráramos lo que el
+							bloque calcula, la información seguiría pasando igual por ese atajo.
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- ============================================ 6 -->
+			<section id="probabilidades">
+				<p class="etapa">Etapa 4</p>
+				<h2>Logits y probabilidades</h2>
+
+				<p>
+					Después de los doce bloques, se toma <strong>solo el último token</strong> — que
+					para entonces acumuló contexto de todos los anteriores — y se lo multiplica por una
+					matriz final. Salen 50.257 números, uno por cada token del vocabulario: los
+					<strong>logits</strong>.
+				</p>
+
+				<figure>
+					<img class="angosta" src="./probabilidades.jpg" alt="La columna de probabilidades, con los candidatos ordenados" />
+					<figcaption>Los candidatos, ordenados por probabilidad.</figcaption>
+				</figure>
+
+				<p>
+					Los logits son puntajes crudos: pueden ser negativos y no suman nada en particular.
+					El <strong>softmax</strong> los convierte en probabilidades entre 0 y 1 que suman 1.
+					Recién ahí se puede decir «este token tiene 23% de chances».
+				</p>
+
+				<h3>Temperatura y muestreo</h3>
+
+				<p>
+					Los dos controles de arriba a la derecha deciden cómo se elige entre esos
+					candidatos. Ninguno cambia el modelo.
+				</p>
+
+				<dl class="datos">
+					<dt>Temperatura</dt>
+					<dd>
+						Escala los logits antes del softmax. Baja (0.2) exagera las diferencias y el
+						modelo se vuelve predecible; alta (1.0+) las aplana y da lugar a candidatos
+						raros.
+					</dd>
+					<dt>Top-k</dt>
+					<dd>Se queda con los <em>k</em> más probables y descarta el resto.</dd>
+					<dt>Top-p</dt>
+					<dd>
+						Se queda con los que haga falta para acumular una probabilidad <em>p</em>: pocos
+						si el modelo está seguro, muchos si está dudando.
+					</dd>
+				</dl>
+
+				<div class="mirar">
+					<p class="tit">Qué mirar</p>
+					<ul>
+						<li>
+							Bajá la temperatura a 0.1 y subila a 1.5, mirando la lista. Es el experimento
+							más rápido para entender qué significa «creatividad» en un LLM.
+						</li>
+						<li>
+							Que el token elegido queda resaltado y se agrega al texto de arriba. Apretá
+							<strong>Generar</strong> otra vez: el modelo vuelve a correr entero, ahora con
+							un token más.
+						</li>
+					</ul>
+				</div>
+
+				<div class="preguntas">
+					<p class="tit">Para comprobar</p>
+					<ol>
+						<li>Con temperatura 0, ¿el modelo sigue siendo aleatorio?</li>
+						<li>¿Por qué solo se usa el último token para predecir, si todos pasaron por los doce bloques?</li>
+						<li>Un texto de 10 tokens, ¿cuántas veces atraviesa el modelo para generar 5 palabras?</li>
+					</ol>
+				</div>
+			</section>
+
+			<!-- ============================================ 7 -->
+			<section id="numeros">
+				<p class="etapa">Referencia</p>
+				<h2>Los números de GPT-2 (small)</h2>
+
+				<p>
+					El modelo que corre en la herramienta es el más chico de la familia GPT-2. Los
+					modelos actuales tienen la misma estructura, con estos números mucho más grandes.
+				</p>
+
+				<div class="tabla-scroll">
+					<table>
+						<tbody>
+							<tr><td>Vocabulario</td><td>50.257 tokens</td></tr>
+							<tr><td>Dimensión del embedding</td><td>768</td></tr>
+							<tr><td>Bloques Transformer</td><td>12</td></tr>
+							<tr><td>Heads por bloque</td><td>12</td></tr>
+							<tr><td>Dimensión por head</td><td>64 &nbsp;<span style="color:#94a3b8">(768 ÷ 12)</span></td></tr>
+							<tr><td>Capa oculta del MLP</td><td>3072 &nbsp;<span style="color:#94a3b8">(768 × 4)</span></td></tr>
+							<tr><td>Contexto máximo</td><td>1024 tokens</td></tr>
+							<tr><td>Parámetros</td><td>~124 millones</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<!-- ============================================ 8 -->
+			<section id="glosario">
+				<p class="etapa">Referencia</p>
+				<h2>Glosario</h2>
+
+				<p>
+					Estos términos quedaron en inglés a propósito, porque así van a aparecer en
+					cualquier bibliografía que consulten.
+				</p>
+
+				<div class="tabla-scroll">
+					<table>
+						<thead>
+							<tr><th>Término</th><th>Qué es</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>token</td><td>La unidad mínima que procesa el modelo. Puede ser una palabra, un pedazo de palabra o un signo.</td></tr>
+							<tr><td>embedding</td><td>El vector de números que representa a un token. También, el proceso de obtenerlo.</td></tr>
+							<tr><td>self-attention</td><td>El mecanismo por el que cada token pondera a los demás. «Self» porque la secuencia se mira a sí misma.</td></tr>
+							<tr><td>head</td><td>Una de las 12 atenciones paralelas dentro de un bloque, cada una con sus propios pesos.</td></tr>
+							<tr><td>Query / Key / Value</td><td>Las tres proyecciones de cada token: qué busca, qué ofrece, qué aporta.</td></tr>
+							<tr><td>logit</td><td>Puntaje crudo, previo al softmax. Puede ser negativo.</td></tr>
+							<tr><td>softmax</td><td>La función que convierte un vector de puntajes en probabilidades que suman 1.</td></tr>
+							<tr><td>GELU</td><td>La activación no lineal del MLP en GPT-2.</td></tr>
+							<tr><td>dropout</td><td>Apagar neuronas al azar durante el entrenamiento, para evitar sobreajuste. En inferencia no actúa.</td></tr>
+							<tr><td>top-k / top-p</td><td>Dos formas de recortar la lista de candidatos antes de elegir uno.</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<footer>
+				<a class="abrir" href="../app/">Abrir la herramienta</a>
+				<p>
+					Capturas tomadas de esta misma herramienta.
+					<a href="../">Volver a la portada</a>.
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

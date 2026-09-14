@@ -137,9 +137,28 @@
 				box-shadow: 0 9px 24px rgba(79, 70, 229, 0.38);
 			}
 
+			.secundario {
+				display: inline-block;
+				color: var(--azul);
+				text-decoration: none;
+				font-size: 1rem;
+				font-weight: 600;
+				padding: 13px 22px;
+				border: 1px solid rgba(37, 99, 235, 0.3);
+				border-radius: 9px;
+				transition: background 0.15s ease, border-color 0.15s ease;
+			}
+
+			.secundario:hover,
+			.secundario:focus-visible {
+				background: rgba(37, 99, 235, 0.07);
+				border-color: rgba(37, 99, 235, 0.5);
+			}
+
 			.pista {
 				font-size: 0.88rem;
 				color: var(--tinta-suave);
+				margin: 14px 0 0;
 			}
 
 			/* ----------------------------------------------------------- prisma */
@@ -282,8 +301,9 @@
 
 			<div class="acciones">
 				<a class="entrar" href="./app/">Entrar a la herramienta</a>
-				<span class="pista">Lo que se ve atrás es, justamente, la herramienta</span>
+				<a class="secundario" href="./guia/">Guía de estudio</a>
 			</div>
+			<p class="pista">Lo que se ve atrás es, justamente, la herramienta</p>
 
 			<svg class="prisma" viewBox="0 56 700 215" role="img" aria-labelledby="tit-prisma">
 			  <title id="tit-prisma">Las letras Q, K y V superpuestas entran a un prisma como un solo haz y salen separadas: Key en rojo, Value en verde y Query en azul, cada una desviada segun su indice de refraccion.</title>
