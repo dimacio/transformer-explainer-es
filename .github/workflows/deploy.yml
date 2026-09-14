@@ -53,6 +53,17 @@ jobs:
           test -f build/index.html
           grep -q 'lang="es"' build/index.html
 
+      # La app queda en /app y la landing ocupa la raiz del sitio.
+      - name: Armar el sitio (landing + app)
+        run: |
+          mv build sitio-app
+          mkdir build
+          mv sitio-app build/app
+          cp landing/index.html build/index.html
+          test -f build/index.html
+          test -f build/app/index.html
+          grep -q 'Entrar a la herramienta' build/index.html
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

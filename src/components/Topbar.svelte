@@ -66,7 +66,7 @@
 		</a>
 		<!-- repo -->
 		<a
-			href="https://github.com/poloclub/transformer-explainer"
+			href="https://github.com/dimacio/transformer-explainer-es"
 			target="_blank"
 			data-click="github_btn"
 		>

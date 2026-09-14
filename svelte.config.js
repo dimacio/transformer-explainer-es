@@ -27,7 +27,9 @@ const config = {
 			'~': './src'
 		},
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/transformer-explainer-es' : ''
+			// La app vive en /app; la raiz la ocupa la landing (landing/index.html),
+			// que el workflow copia al publicar.
+			base: process.env.NODE_ENV === 'production' ? '/transformer-explainer-es/app' : ''
 		}
 	}
 };
