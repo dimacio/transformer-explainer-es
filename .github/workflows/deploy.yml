@@ -1,0 +1,66 @@
+name: Publicar en GitHub Pages
+
+# Compila en los runners de GitHub y publica el resultado. El modelo GPT-2
+# (630 MB) ya vive en el repo, asi que nunca sale ni vuelve a entrar por la
+# conexion de casa: el runner lo lee del checkout y lo sube internamente.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si se encadenan varios pushes, que termine el ultimo y no se pisen.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # npm ci en vez de npm install: usa el lockfile tal cual y falla si esta
+      # desincronizado con package.json, que es justo lo que queremos detectar.
+      - name: Instalar dependencias
+        run: npm ci
+
+      # sharp es nativo (entra por @xenova/transformers) y a veces su binario no
+      # queda instalado. El sintoma recien aparece en el prerender del build,
+      # como un 500 que no menciona a sharp por ningun lado.
+      - name: Verificar sharp
+        run: node -e "require('sharp')" || (npm rebuild sharp && node -e "require('sharp')")
+
+      - name: Compilar
+        run: npm run build
+
+      - name: Comprobar que salio en castellano
+        run: |
+          test -f build/index.html
+          grep -q 'lang="es"' build/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

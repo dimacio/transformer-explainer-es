@@ -353,7 +353,7 @@
 				{showTooltip}
 			/>
 			<TextbookTooltip id="masked-self-attention">
-				<div class="matrix-label">Dot product</div>
+				<div class="matrix-label">Producto punto</div>
 			</TextbookTooltip>
 
 			<Tooltip class="popover tooltip">
@@ -365,7 +365,7 @@
 				<span class="val">{qkColorScaleDomain[1]?.toFixed(1)}</span>
 			</div>
 		</div>
-		<!-- Scaling · Mask -->
+		<!-- Escalado · Máscara -->
 		<div
 			class="attention-matrix attention-mask flex flex-col items-center"
 			bind:this={attentionMask}
@@ -419,7 +419,7 @@
 				/>
 			</div>
 			<TextbookTooltip id="masked-self-attention">
-				<div class="matrix-label">Scaling · Mask</div>
+				<div class="matrix-label">Escalado · Máscara</div>
 			</TextbookTooltip>
 
 			<Tooltip class="popover tooltip">
@@ -523,7 +523,7 @@
 			/>
 
 			<div class="matrix-label flex items-center gap-1">
-				Attention <ZoomInOutline></ZoomInOutline>
+				Atención <ZoomInOutline></ZoomInOutline>
 			</div>
 		</div>
 	</div>

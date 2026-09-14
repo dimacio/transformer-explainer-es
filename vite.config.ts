@@ -6,7 +6,11 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: `@import 'src/styles/variables.scss';`
+				// loadPaths: necesario desde Vite 7, que ya no resuelve las
+				// rutas de sass relativas a la raíz del proyecto.
+				loadPaths: ['.'],
+				// @use en lugar de @import, que Dart Sass 3 elimina.
+				additionalData: `@use 'src/styles/variables.scss' as *;`
 			}
 		}
 	},

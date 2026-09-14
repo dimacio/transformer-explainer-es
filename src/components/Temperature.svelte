@@ -34,10 +34,12 @@
 	>
 		<div class="temperature-text flex items-center gap-[2px]">
 			<TextbookTooltip id="temperature">
-				<div>Temperature</div></TextbookTooltip
+				<div>Temperatura</div></TextbookTooltip
 			>
 			<!-- <HelpPopover id="temperature-help"  goTo="article-temperature">
-				{`Changes output \nprobability distribution \nand randomness \nof next token.`}
+				{`Cambia la distribución de probabilidad
+de salida y el grado de azar
+del token siguiente.`}
 			</HelpPopover> -->
 		</div>
 	</Slider>

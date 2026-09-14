@@ -35,20 +35,20 @@ const { drawLine, removeLine } = drawResidualLine();
 export const textPages: TextbookPage[] = [
 	{
 		id: 'what-is-transformer',
-		title: 'What is Transformer?',
-		content: `<p><strong>Transformer</strong> is the core architecture behind modern AI, powering models like ChatGPT and Gemini. Introduced in 2017, it revolutionized how AI processes information. The same architecture is used for training on massive datasets and for inference to generate outputs. Here we use GPT-2 (small), simpler than newer ones but perfect for learning the fundamentals.</p>
+		title: '¿Qué es un Transformer?',
+		content: `<p>El <strong>Transformer</strong> es la arquitectura que está detrás de la IA moderna y la que hace funcionar a modelos como ChatGPT y Gemini. Presentada en 2017, cambió por completo la forma en que la IA procesa información. La misma arquitectura se usa para entrenar sobre conjuntos de datos enormes y para la inferencia que genera las salidas. Aquí se usa GPT-2 (small): más simple que los modelos recientes, pero ideal para aprender los fundamentos.</p>
 `,
 		on: () => {},
 		out: () => {}
 	},
 	{
 		id: 'how-transformers-work',
-		title: 'How Transformers Work?',
-		content: `<p>Transformers aren't magic—they build text step by step by asking:</p>
+		title: '¿Cómo funciona un Transformer?',
+		content: `<p>Los Transformers no son magia: construyen el texto paso a paso preguntando:</p>
 	<blockquote class="question">
-		"What is the most probable next word that will follow this input?"
+		"¿Cuál es la palabra más probable que sigue a esta entrada?"
 	</blockquote>
-	<p>Here we explore how a trained model generates text. Write your own text or use an example, then click <strong>Generate</strong> to see it in action. If the model isn’t ready yet, try another <strong>Example</strong>.</p>`,
+	<p>Aquí se explora cómo genera texto un modelo ya entrenado. Se puede escribir un texto propio o usar un ejemplo y después hacer clic en <strong>Generar</strong> para verlo en acción. Si el modelo todavía no está listo, conviene probar con otro <strong>Ejemplo</strong>.</p>`,
 		on: () => {
 			highlightElements(['.input-form']);
 			if (get(isFetchingModel)) {
@@ -77,9 +77,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'transformer-architecture',
-		title: 'Transformer Architecture',
+		title: 'Arquitectura del Transformer',
 		content:
-			'<p>Transformer has three main parts:</p><div class="numbered-list"><div class="numbered-item"><span class="number-circle">1</span><div class="item-content"><strong>Embeddings</strong> turn text into numbers.</div></div><div class="numbered-item"><span class="number-circle">2</span><div class="item-content"><strong>Transformer blocks</strong> mix information with Self-Attention and refine it with an MLP.</div></div><div class="numbered-item"><span class="number-circle">3</span><div class="item-content"><strong>Probabilities</strong> determine the likelihood of each next token.</div></div></div>',
+			'<p>El Transformer tiene tres partes principales:</p><div class="numbered-list"><div class="numbered-item"><span class="number-circle">1</span><div class="item-content">Los <strong>embeddings</strong> convierten el texto en números.</div></div><div class="numbered-item"><span class="number-circle">2</span><div class="item-content">Los <strong>bloques Transformer</strong> mezclan información con self-attention y la refinan con un MLP.</div></div><div class="numbered-item"><span class="number-circle">3</span><div class="item-content">Las <strong>probabilidades</strong> determinan qué tan probable es cada token siguiente.</div></div></div>',
 		on: () => {
 			const selectors = [
 				'.step.embedding',
@@ -104,7 +104,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'embedding',
 		title: 'Embedding',
-		content: `<p>Before a Transformer can use text, it first breaks it into small units and represents each as a list of numbers (vector). This process is called <strong>embedding</strong>, and the term can refer to both the process and the resulting vector.</p><p>In this tool, each vector appears as a rectangle, and hovering over it shows its size.</p>`,
+		content: `<p>Antes de poder usar un texto, el Transformer lo divide en unidades pequeñas y representa cada una como una lista de números (un vector). Ese proceso se llama <strong>embedding</strong>, y el término designa tanto al proceso como al vector resultante.</p><p>En esta herramienta cada vector aparece como un rectángulo; al pasar el mouse por encima se muestra su tamaño.</p>`,
 		on: () => {
 			highlightElements(['.step.embedding .title']);
 		},
@@ -124,8 +124,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'token-embedding',
-		title: 'Token Embedding',
-		content: `<p><strong>Tokenization</strong> splits input text into tokens—small units like words or parts of words. GPT-2 (small) has 50,257 token vocabulary, each with a unique ID.</p><p>In the <strong>token embedding</strong> step, every token is matched to a 768-number vector from a large lookup table. These vectors are learned during training to best represent each token’s meaning.</p>`,
+		title: 'Embedding de token',
+		content: `<p>La <strong>tokenización</strong> divide el texto en tokens: unidades pequeñas, como palabras o partes de palabras. GPT-2 (small) tiene un vocabulario de 50.257 tokens, cada uno con su ID.</p><p>En el <strong>embedding de token</strong>, cada token se asocia a un vector de 768 números de una tabla de búsqueda. Esos vectores se aprenden durante el entrenamiento para representar el significado de cada token.</p>`,
 		on: function () {
 			const selectors = [
 				'.token-column .column.token-string',
@@ -155,8 +155,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'positional-encoding',
-		title: 'Positional Encoding',
-		content: `<p>Word order matters in language. <strong>Positional encoding</strong> gives each token information about its place in the sequence.</p><p>GPT-2 does this by adding a learned positional embedding to the token's embedding, but newer models may use other methods, like RoPE, which encodes position by rotating certain vectors. All aim to help the model understand order in text.</p>`,
+		title: 'Codificación posicional',
+		content: `<p>El orden de las palabras importa: la <strong>codificación posicional</strong> le da a cada token información sobre su lugar en la secuencia.</p><p>GPT-2 suma un embedding posicional aprendido al del token. Los modelos nuevos usan otros métodos, como RoPE, que codifica la posición rotando vectores. Todos buscan que el modelo entienda el orden.</p>`,
 		on: function () {
 			const selectors = [
 				'.token-column .column.position-embedding',
@@ -186,8 +186,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'blocks',
-		title: 'Repetitive Transformer Blocks',
-		content: `<p>A <strong>Transformer block</strong> is the main unit of processing in the model. It has two parts:</p><ul><li><strong>Multi-head self-attention</strong> – lets tokens share information</li><li><strong>MLP</strong> – refines each token's details</li></ul><p>Models stack many blocks so token representations become richer as they pass through. GPT-2 (small) has 12 of them.</p>`,
+		title: 'Bloques Transformer repetidos',
+		content: `<p>El <strong>bloque Transformer</strong> es la unidad de procesamiento del modelo. Tiene dos partes:</p><ul><li><strong>Multi-head self-attention</strong>: permite que los tokens compartan información</li><li><strong>MLP</strong>: refina los detalles de cada token</li></ul><p>Los modelos apilan muchos bloques: cada token se enriquece al atravesarlos. GPT-2 (small) tiene 12.</p>`,
 		on: function () {
 			this.timeoutId = setTimeout(
 				() => {
@@ -230,9 +230,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'self-attention',
-		title: 'Multi-Head Self Attention',
+		title: 'Multi-head self-attention',
 		content:
-			'<p><strong>Self-attention</strong> lets the model decide which parts of the input are most relevant to each token. This helps it capture meaning and relationships, even between far-apart words.</p><p>In <strong>multi-head</strong> form, the model runs several attention processes in parallel, each focusing on different patterns in the text.</p>',
+			'<p>La <strong>self-attention</strong> permite que el modelo decida qué partes de la entrada son más relevantes para cada token. Así captura significado y relaciones, incluso entre palabras muy alejadas entre sí.</p><p>En su forma <strong>multi-head</strong>, el modelo ejecuta varios procesos de atención en paralelo y cada uno se concentra en patrones distintos del texto.</p>',
 		on: () => {
 			highlightElements(['.step.attention']);
 		},
@@ -244,14 +244,14 @@ export const textPages: TextbookPage[] = [
 		id: 'qkv',
 		title: 'Query, Key, Value',
 		content: `
-	<p>To perform self-attention, each token's embedding is transformed into 
-  <span class="highlight">three new embeddings</span>—
+	<p>Para aplicar self-attention, el embedding de cada token se transforma en 
+  <span class="highlight">tres embeddings nuevos</span>: 
   <span class="blue">Query</span>,  
-  <span class="red">Key</span>, and  
+  <span class="red">Key</span> y  
   <span class="green">Value</span>.
-  This transformation is done by applying different weights and biases to each token embedding. These parameters (weights and biases), are optimized through training.</p>
+  Para eso se aplican pesos y sesgos distintos a cada embedding, parámetros que se optimizan durante el entrenamiento.</p>
 
-<p>Once created, <span class="blue">Queries</span> compare with <span class="red">Keys</span> to measure relevance, and this relevance is used to weight the <span class="green">Values</span>.</p>
+<p>Una vez creados, las <span class="blue">Queries</span> se comparan con las <span class="red">Keys</span> para medir la relevancia, y esa relevancia se usa para ponderar los <span class="green">Values</span>.</p>
 `,
 		on: function () {
 			this.timeoutId = setTimeout(
@@ -285,7 +285,7 @@ export const textPages: TextbookPage[] = [
 		id: 'multi-head',
 		title: 'Multi-head',
 		content:
-			'<p>After creating <span class="blue">Q</span>, <span class="red">K</span>, and <span class="green">V</span> embeddings, the model splits them into several <strong>heads</strong> (12 in GPT-2 small). Each head works with its own smaller set of <span class="blue">Q</span>/<span class="red">K</span>/<span class="green">V</span>, focusing on different patterns in the text—like grammar, meaning, or long-range links.</p><p>Multiple heads let the model learn many kinds of relationships in parallel, making its understanding richer.</p>',
+			'<p>Después de crear los embeddings <span class="blue">Q</span>, <span class="red">K</span> y <span class="green">V</span>, el modelo los divide en varias <strong>heads</strong> (12 en GPT-2 small). Cada head trabaja con su propio conjunto reducido de <span class="blue">Q</span>/<span class="red">K</span>/<span class="green">V</span> y se concentra en patrones distintos del texto: gramática, significado o vínculos de larga distancia.</p><p>Tener varias heads le permite al modelo aprender muchos tipos de relaciones en paralelo, y eso enriquece su comprensión.</p>',
 		on: () => {
 			highlightAttentionPath();
 			highlightElements(['.multi-head .head-title']);
@@ -307,8 +307,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'masked-self-attention',
-		title: 'Masked Self Attention',
-		content: `<p>In each head, the model decides how much each token focuses on others:</p><ul><li><strong>Dot Product</strong> – Multiply matching numbers in <span class="blue">Query</span>/<span class="red">Key</span> vectors, sum to get <span class="purple">attention scores</span>.</li><li><strong>Mask</strong> – Hide future tokens so it can't peek ahead.</li><li><strong>Softmax</strong> – Convert scores to probabilities, each row summing to 1, showing focus on earlier tokens.</li></ul>`,
+		title: 'Self-attention enmascarada',
+		content: `<p>Dentro de cada head, el modelo decide cuánto atiende cada token a los demás:</p><ul><li><strong>Producto punto</strong>: multiplica los vectores <span class="blue">Query</span>/<span class="red">Key</span> número a número y los suma, dando los <span class="purple">puntajes de atención</span>.</li><li><strong>Máscara</strong>: oculta los tokens futuros para que no pueda espiar hacia adelante.</li><li><strong>Softmax</strong>: convierte los puntajes en probabilidades; cada fila suma 1.</li></ul>`,
 		on: () => {
 			highlightAttentionPath();
 			highlightElements(['.attention-matrix.attention-result']);
@@ -331,9 +331,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'output-concatenation',
-		title: 'Attention Output & Concatenation',
+		title: 'Salida de atención y concatenación',
 		content:
-			'<p>Each head <span class="highlight">multiplies its <span class="purple">attention scores</span> with the <span class="green">Value</span> embeddings to produce its attention output</span>—a refined representation of each token after considering context.</p><p>GPT-2 (small) has 12 such outputs, which are concatenated to form a single vector of the original size (768 numbers).</p>',
+			'<p>Cada head <span class="highlight">multiplica sus <span class="purple">puntajes de atención</span> por los embeddings <span class="green">Value</span> para producir su salida de atención</span>: una representación refinada de cada token, ya considerando el contexto.</p><p>GPT-2 (small) produce 12 salidas de este tipo, que se concatenan para formar un único vector del tamaño original (768 números).</p>',
 		on: function () {
 			this.timeoutId = setTimeout(
 				() => {
@@ -363,9 +363,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'mlp',
-		title: 'MLP (Multi-Layer Perceptron)',
+		title: 'MLP (perceptrón multicapa)',
 		content:
-			'<p>The attention output goes through an <strong>MLP</strong> to refine token representations. A Linear layer changes embedding values and size using learned weights and bias, then a non-linear activation decides how much each value passes.</p><p>Many activation types exist; GPT-2 uses <strong>GELU</strong>, which lets small values pass partially and large values pass fully, helping capture both subtle and strong patterns.</p>',
+			'<p>La salida de atención atraviesa un <strong>MLP</strong> que refina cada token. Una capa lineal cambia los valores y el tamaño del embedding con pesos y sesgos aprendidos, y una activación no lineal decide cuánto pasa de cada valor.</p><p>GPT-2 usa <strong>GELU</strong>, que deja pasar parcialmente los valores pequeños y del todo los grandes: así captura patrones sutiles y marcados.</p>',
 		on: () => {
 			highlightElements(['.step.mlp', '.operation-col.activation']);
 		},
@@ -376,8 +376,8 @@ export const textPages: TextbookPage[] = [
 
 	{
 		id: 'output-logit',
-		title: 'Output Logit',
-		content: `<p>After all Transformer blocks, the last token's output embedding, enriched with context from all previous tokens, is multiplied by learned weights in a final layer.</p><p>This produces <strong>logits</strong>, 50,257 numbers—one for each token in GPT-2’s vocabulary—that indicate how likely each token is to come next.</p>`,
+		title: 'Logits de salida',
+		content: `<p>Después de todos los bloques Transformer, el embedding de salida del último token —enriquecido con el contexto de todos los tokens anteriores— se multiplica por los pesos aprendidos de una capa final.</p><p>Eso produce los <strong>logits</strong>: 50.257 números, uno por cada token del vocabulario de GPT-2, que indican qué tan probable es que cada token venga a continuación.</p>`,
 		on: () => {
 			highlightElements(['g.path-group.softmax', '.column.final']);
 		},
@@ -398,9 +398,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'output-probabilities',
-		title: 'Probabilities',
+		title: 'Probabilidades',
 		content:
-			'<p>Logits are just raw scores. To make them easier to interpret, we convert them into <strong>probabilities</strong> between 0 and 1, where all add up to 1. This tells us the likelihood of each token being the next word.</p><p>Instead of always picking the highest-probability token, we can use different selection strategies to balance safety and creativity in the generated text.</p>',
+			'<p>Los logits son apenas puntajes crudos. Para interpretarlos más fácilmente se convierten en <strong>probabilidades</strong> entre 0 y 1 que suman 1 en total. Eso indica qué tan probable es que cada token sea la próxima palabra.</p><p>En lugar de elegir siempre el token de mayor probabilidad, se pueden usar distintas estrategias de selección para equilibrar previsibilidad y creatividad en el texto generado.</p>',
 		on: () => {
 			highlightElements(['.step.softmax .title']);
 		},
@@ -420,9 +420,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'temperature',
-		title: 'Temperature',
+		title: 'Temperatura',
 		content:
-			'<p><strong>Temperature</strong> works by scaling the logits before turning them into probabilities. A <strong>low temperature</strong> (e.g., 0.2) makes large logits even larger and small ones smaller, favoring the highest-scoring tokens and leading to more <strong>predictable choices</strong>. A <strong>high temperature</strong> (e.g., 1.0 or above) flattens the differences, making less likely tokens more competitive and leading to more <strong>creative outputs</strong>.</p>',
+			'<p>La <strong>temperatura</strong> escala los logits antes de convertirlos en probabilidades. Una <strong>temperatura baja</strong> (por ejemplo, 0.2) agranda aún más los logits grandes y achica los chicos: favorece a los tokens mejor puntuados y lleva a <strong>elecciones más predecibles</strong>. Una <strong>temperatura alta</strong> (1.0 o más) aplana las diferencias, vuelve más competitivos a los tokens menos probables y lleva a <strong>salidas más creativas</strong>.</p>',
 		on: function () {
 			if (get(expandedBlock).id !== 'softmax') {
 				expandedBlock.set({ id: 'softmax' });
@@ -470,9 +470,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'sampling',
-		title: 'Sampling Strategy',
+		title: 'Estrategia de muestreo',
 		content:
-			'<p>Finally, we need a strategy to pick the next token. Many exist, but here are common ones: Greedy search picks the top one. <strong>Top-k</strong> keeps only the k most likely tokens, and <strong>top-p</strong> keeps the smallest set whose total probability is at least p—trimming unlikely ones early.</p><p>Then softmax turns the remaining logits into probabilities, and one token is picked at random from the allowed set.</p>',
+			'<p>Falta una estrategia para elegir el token siguiente. Las más comunes: la búsqueda greedy elige el de mayor probabilidad; <strong>top-k</strong> conserva solo los k más probables; <strong>top-p</strong>, el conjunto más chico cuya probabilidad total llega a p.</p><p>Después softmax convierte los logits restantes en probabilidades y se elige un token al azar del conjunto permitido.</p>',
 		on: function () {
 			if (get(expandedBlock).id !== 'softmax') {
 				expandedBlock.set({ id: 'softmax' });
@@ -520,8 +520,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'residual',
-		title: 'Residual Connection',
-		content: `<p>Transformers have auxiliary features that enhance the model performance. For example, a <strong>residual connection</strong> adds a layer's input to its output, keeping information from fading through many blocks. In GPT-2, it's used twice per block to train deeper stacks effectively.</p>`,
+		title: 'Conexión residual',
+		content: `<p>Los Transformers tienen componentes auxiliares que mejoran el rendimiento del modelo. Por ejemplo, una <strong>conexión residual</strong> suma la entrada de una capa a su salida, y así evita que la información se diluya al atravesar muchos bloques. En GPT-2 se usa dos veces por bloque, lo que permite entrenar pilas más profundas de manera efectiva.</p>`,
 		on: function () {
 			this.timeoutId = setTimeout(
 				() => {
@@ -542,8 +542,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'layer-normalization',
-		title: 'Layer Normalization',
-		content: `<p><strong>Layer Normalization</strong> helps stabilize both training and inference by adjusting input numbers so their mean and variance stay consistent. This makes the model less sensitive to its starting weights and helps it learn more effectively. In GPT-2, it's applied before self-attention, before the MLP, and once more before the final output.</p>`,
+		title: 'Normalización por capa',
+		content: `<p>La <strong>normalización por capa</strong> estabiliza tanto el entrenamiento como la inferencia: ajusta los números de entrada para que su media y su varianza se mantengan consistentes. Eso lo vuelve menos sensible a sus pesos iniciales y lo ayuda a aprender mejor. En GPT-2 se aplica antes de la self-attention, antes del MLP y antes de la salida final.</p>`,
 		on: () => {
 			highlightElements(['.operation-col.ln']);
 		},
@@ -554,7 +554,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'dropout',
 		title: 'Dropout',
-		content: `<p>During training, <strong>dropout</strong> randomly turns off some connections between numbers so the model doesn't overfit to specific patterns. This helps it learn features that generalize better. GPT-2 uses it, but newer LLMs often skip it because they train on huge datasets and overfitting is less of a problem. In inference, dropout is turned off.</p>`,
+		content: `<p>Durante el entrenamiento, el <strong>dropout</strong> apaga al azar algunas conexiones entre números para que el modelo no se sobreajuste a patrones específicos, y así aprende características que generalizan mejor. GPT-2 lo usa, pero los LLM más nuevos suelen omitirlo: entrenan con conjuntos enormes y el sobreajuste es menos problemático. En inferencia está desactivado.</p>`,
 		on: () => {
 			highlightElements(['.operation-col.dropout']);
 		},

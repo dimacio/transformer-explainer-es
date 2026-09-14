@@ -321,9 +321,12 @@
 	<div class="weight-popover-content flex items-center justify-start">
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1">
-				<span>Output<br />Embedding</span>
+				<span>Embedding<br />de salida</span>
 				<HelpPopover id="hidden-states" 
-					>{`After passing through all blocks, \nthe final token's embedding vector \ncontains all the contextual information \nfrom the preceding tokens.`}</HelpPopover
+					>{`Después de atravesar todos los bloques,
+el vector de embedding del último token
+contiene toda la información contextual
+de los tokens anteriores.`}</HelpPopover
 				>
 			</div>
 			<Matrix
@@ -341,9 +344,10 @@
 		<div class="operator"><div class="symbol mul pl-3">&times;</div></div>
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1">
-				Output Projection Weights
+				Pesos de proyección de salida
 				<HelpPopover id="lm-head-weights" 
-					>{`Transforms the final embedding into a vocabulary distribution.\nParameters were learned in training, fixed in prediction.`}</HelpPopover
+					>{`Transforma el embedding final en una distribución sobre el vocabulario.
+Son parámetros aprendidos en el entrenamiento y fijos en la predicción.`}</HelpPopover
 				>
 			</div>
 			<div class="flex gap-0">
@@ -365,8 +369,9 @@
 		<div class="operator"><div class="symbol plus">+</div></div>
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1">
-				Output Projection Bias<HelpPopover id="lm-head-bias" 
-					>{`Offsets added after the transformation.\nParameters were learned in training, fixed in prediction.`}</HelpPopover
+				Sesgos de proyección de salida<HelpPopover id="lm-head-bias" 
+					>{`Desplazamientos que se suman después de la transformación.
+Son parámetros aprendidos en el entrenamiento y fijos en la predicción.`}</HelpPopover
 				>
 			</div>
 			<Matrix
@@ -387,7 +392,8 @@
 			<div class="title flex items-center gap-1">
 				Logits
 				<HelpPopover id="logits" 
-					>{`Raw scores representing the model’s preference \nfor each vocabulary token before applying softmax.`}</HelpPopover
+					>{`Puntajes crudos que representan la preferencia del modelo
+por cada token del vocabulario, antes de aplicar softmax.`}</HelpPopover
 				>
 			</div>
 			<div class="flex">

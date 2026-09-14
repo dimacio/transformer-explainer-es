@@ -250,7 +250,7 @@
 		on:mouseenter={handleMouseEnter}
 		on:mouseleave={handleMouseLeave}
 		role="dialog"
-		aria-label="Textbook"
+		aria-label="Manual"
 		style="width: {size.width}px; height: {size.height}px;"
 	>
 		<div class="card-header">
@@ -332,6 +332,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
+			overflow-y: auto;
 			opacity: 0;
 			transition: opacity 0.3s ease;
 			// display: flex;

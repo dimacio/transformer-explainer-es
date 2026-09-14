@@ -60,7 +60,7 @@
 
 <!-- <Popover
 	class={classNames('popover positional-encoding-popover text-sm', className)}
-	title="Positional Encoding"
+	title="Codificación posicional"
 	{offset}
 	{triggeredBy}
 	{trigger}
@@ -68,7 +68,7 @@
 	{open}
 > -->
 <div class="popover-container emb_pos">
-	<!-- <div class="title">Positional Encoding</div> -->
+	<!-- <div class="title">Codificación posicional</div> -->
 
 	<div class="content">
 		<div class="token-container">
@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="positions">
-				<div class="subtitle">Position</div>
+				<div class="subtitle">Posición</div>
 				<div class="subcontent flex flex-col">
 					{#each $tokens as token, token_idx}
 						<div
@@ -132,7 +132,7 @@
 			</div>
 		</div>
 		<div class="viz-container">
-			<div class="subtitle">Encoding Matrix</div>
+			<div class="subtitle">Matriz de codificación</div>
 			<div class="subcontent viz-subcontent">
 				<div class="chart-container mx-auto">
 					<div class="embed-dim-axis">

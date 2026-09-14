@@ -184,7 +184,7 @@
 			<!-- token -->
 			<div class="column token-string relative">
 				{#if isEmbeddingExpanded}<div class="subtitle embedding-detail">
-						<TextbookTooltip id="token-embedding">Tokenization</TextbookTooltip>
+						<TextbookTooltip id="token-embedding">Tokenización</TextbookTooltip>
 					</div>{/if}
 				{#each $tokens as token, index}
 					<div class="cell" class:last={index === $tokens.length - 1}>
@@ -196,12 +196,15 @@
 				<!-- token id and embedding -->
 				<div class="column token-embedding embedding-detail">
 					<div class="subtitle flex items-center gap-1">
-						<TextbookTooltip id="token-embedding"><span>Token<br />Embedding</span></TextbookTooltip
+						<TextbookTooltip id="token-embedding"><span>Embedding<br />de token</span></TextbookTooltip
 						>
 						<!-- <HelpPopover
 							id="token-embedding"
 							goTo="article-token-embedding"
-							>{`Converts tokens into numerical \nrepresentations using embeddings \nderived from predefined vocabulary, \ncapturing their semantic meaning.`}</HelpPopover
+							>{`Convierte los tokens en representaciones
+numéricas usando embeddings derivados
+de un vocabulario predefinido, que capturan
+su significado semántico.`}</HelpPopover
 						> -->
 					</div>
 					{#each $tokens as token, index}
@@ -244,12 +247,14 @@
 				<div class="column embedding-detail position-embedding">
 					<div class="subtitle flex gap-1">
 						<TextbookTooltip id="positional-encoding">
-							<span>Positional<br />Encoding</span>
+							<span>Codificación<br />posicional</span>
 						</TextbookTooltip>
 						<!-- <HelpPopover
 							id="position-embedding"
 							goTo="article-positional-embedding"
-							>{`Converts token positions into \nnumerical representations that \ncapture their order in the sequence.`}</HelpPopover
+							>{`Convierte la posición de cada token en
+representaciones numéricas que capturan
+su orden dentro de la secuencia.`}</HelpPopover
 						> -->
 					</div>
 					{#each $tokens as token, index}
@@ -267,7 +272,7 @@
 							</div>
 							<span class="index-val text-xs">
 								{#if index === 0}
-									<span class="label">position</span><br />
+									<span class="label">posición</span><br />
 								{/if}
 								<span class="val">{index}</span>
 							</span>

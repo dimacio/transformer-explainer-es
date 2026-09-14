@@ -320,7 +320,9 @@
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1 self-end">
 				Embeddings<HelpPopover id="qkv-emgeddings" 
-					>{`Embeddings originate from tokens \nbut evolve through blocks, becoming \nabstract representations.`}</HelpPopover
+					>{`Los embeddings nacen de los tokens,
+pero evolucionan bloque a bloque
+hasta volverse representaciones abstractas.`}</HelpPopover
 				>
 			</div>
 			<!-- (tokenLen, 768) -->
@@ -339,8 +341,9 @@
 		<div class="operator"><div class="symbol mul">&times;</div></div>
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1">
-				Q·K·V Weights<HelpPopover id="qkv-weights" 
-					>{`Transforms embedding vectors into Query, Key, and Value vectors. \nParameters were learned in training, fixed in prediction.`}</HelpPopover
+				Pesos Q·K·V<HelpPopover id="qkv-weights" 
+					>{`Transforma los vectores de embedding en vectores Query, Key y Value.
+Son parámetros aprendidos en el entrenamiento y fijos en la predicción.`}</HelpPopover
 				>
 			</div>
 			<div class="flex gap-0">
@@ -362,8 +365,9 @@
 		<div class="operator"><div class="symbol plus">+</div></div>
 		<div class="matrix flex flex-col items-center">
 			<div class="title flex items-center gap-1">
-				Q·K·V Bias<HelpPopover id="qkv-bias" 
-					>{`Offsets added after transformation. \nParameters that learned in training, fixed in prediction.`}</HelpPopover
+				Sesgos Q·K·V<HelpPopover id="qkv-bias" 
+					>{`Desplazamientos que se suman después de la transformación.
+Son parámetros aprendidos en el entrenamiento y fijos en la predicción.`}</HelpPopover
 				>
 			</div>
 			<Matrix

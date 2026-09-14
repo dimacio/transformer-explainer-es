@@ -11,7 +11,7 @@
 
 <CommonPopover
 	className="ln-popover"
-	title="Layer Normalization"
+	title="Normalización por capa"
 	{offset}
 	{triggeredBy}
 	{trigger}
@@ -19,7 +19,7 @@
 	goTo="article-ln"
 >
 	<div class="ln-content">
-		Normalizes layer input to have a standard distribution for stability.
+		Normaliza la entrada de la capa para que tenga una distribución estándar y gane estabilidad.
 	</div></CommonPopover
 >
 

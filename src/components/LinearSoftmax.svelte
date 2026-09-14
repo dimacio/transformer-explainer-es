@@ -21,8 +21,8 @@
 	import { ga } from '~/utils/event';
 	import { EyeOutline, ZoomInOutline } from 'flowbite-svelte-icons';
 	import { fade } from 'svelte/transition';
-	import SoftmaxPopover from './popovers/SoftmaxPopover.svelte';
-	import LogitWeightPopover from './popovers/LogitWeightPopover.svelte';
+	import SoftmaxPopover from './Popovers/SoftmaxPopover.svelte';
+	import LogitWeightPopover from './Popovers/LogitWeightPopover.svelte';
 	import { textPages } from '~/utils/textbookPages';
 	import TextbookTooltip from '~/components/common/TextbookTooltip.svelte';
 
@@ -211,7 +211,7 @@
 		data-click="prob-step-title"
 	>
 		<div class="title-text flex w-max items-center gap-1">
-			Probabilities
+			Probabilidades
 			<ZoomInOutline></ZoomInOutline>
 		</div>
 	</div>
@@ -235,7 +235,7 @@
 					>
 						<span>{item.token.trim() === '' ? '\u00A0' : item.token}</span>
 						<Tooltip class="softmax-tooltip" type="light">
-							Token ID: <span class="number">{tokenIds[idx]}</span>
+							ID de token: <span class="number">{tokenIds[idx]}</span>
 						</Tooltip>
 					</div>
 				{/each}
@@ -260,7 +260,7 @@
 					</div>
 					<div class="title-box scaled">
 						<TextbookTooltip id="temperature"
-							><div class="title-text">Scaled logits</div></TextbookTooltip
+							><div class="title-text">Logits escalados</div></TextbookTooltip
 						>
 					</div>
 					<div class="title-box sampling">
@@ -363,12 +363,12 @@
 											<span class="number" class:strike={cutoffIndex < idx}>{prob.toFixed(2)}</span>
 											{#if cutoffIndex === idx}
 												<span class="cutoff-label"
-													>sum={cumulativeProbabilities[idx]?.toFixed(2)}</span
+													>suma={cumulativeProbabilities[idx]?.toFixed(2)}</span
 												>
 											{/if}
 										</div>
 										<Tooltip class="softmax-tooltip" type="light">
-											sum=<Katex math={`${cumulativeProbabilities[idx]?.toFixed(2)}`}></Katex>
+											suma=<Katex math={`${cumulativeProbabilities[idx]?.toFixed(2)}`}></Katex>
 										</Tooltip>
 									{/if}
 								{/each}

@@ -29,7 +29,7 @@
 		<div class="sampling-type">
 			<div class="title flex items-center gap-[2px]">
 				<TextbookTooltip id="sampling">
-					<div>Sampling</div></TextbookTooltip
+					<div>Muestreo</div></TextbookTooltip
 				>
 				<!-- <HelpPopover
 					id="sampling-help"
@@ -37,7 +37,8 @@
 					goTo="article-sampling"
 					textbook="sampling"
 				>
-					{`Changes how next \ntoken is selected from \nprobability distribution.`}
+					{`Cambia cómo se elige el token siguiente
+a partir de la distribución de probabilidad.`}
 				</HelpPopover> -->
 			</div>
 			<div class="sampling-type-input flex">

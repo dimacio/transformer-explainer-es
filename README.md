@@ -1,44 +1,76 @@
-# Transformer Explainer: Interactive Learning of Text-Generative Models
+# Transformer Explainer — versión en castellano
 
-Transformer Explainer is an interactive visualization tool designed to help anyone learn how Transformer-based models like GPT work. It runs a live GPT-2 model right in your browser, allowing you to experiment with your own text and observe in real time how internal components and operations of the Transformer work together to predict the next tokens. Try Transformer Explainer at http://poloclub.github.io/transformer-explainer and watch a demo video on YouTube https://youtu.be/TFUc41G2ikY.<br/><br/>
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![arxiv badge](https://img.shields.io/badge/arXiv-2408.04619-red)](https://arxiv.org/abs/2408.04619)
+Traducción al castellano de [**Transformer Explainer**](https://github.com/poloclub/transformer-explainer), la visualización interactiva del Polo Club of Data Science (Georgia Tech) que corre un modelo **GPT-2 (small) en vivo dentro del navegador** y muestra, paso a paso, cómo se predice el token siguiente.
 
-<a href="https://youtu.be/TFUc41G2ikY" target="_blank"><img width="100%" src='https://github.com/user-attachments/assets/0a4d8888-6555-4df5-bc71-77f1299115c3'></a>
+> **Esto no es el proyecto original.** Es un fork con el texto traducido, mantenido de forma independiente. Para la versión oficial, en inglés y con las últimas novedades, ir a [poloclub.github.io/transformer-explainer](http://poloclub.github.io/transformer-explainer).
 
-## Live Demo
+## Demo
 
-Try Transformer Explainer: http://poloclub.github.io/transformer-explainer
+- Esta traducción: `https://dimacio.github.io/transformer-explainer-es`
+- Original en inglés: [poloclub.github.io/transformer-explainer](http://poloclub.github.io/transformer-explainer)
 
-## Research Paper
+## Qué se tradujo y qué no
 
-[**Transformer Explainer: Learning LLM Transformers with Interactive Visual Explanation and Experimentations**](https://dl.acm.org/doi/pdf/10.1145/3772318.3791725).
-Aeree Cho, Grace C. Kim, Alexander Karpekov, Seongmin Lee, Alec Helbling, Benjamin Hoover, Zijie J. Wang, Minsuk Kahng, Duen Horng Chau.
-_Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems._
+| | Estado |
+|---|---|
+| Tarjetas del manual (las 20 explicaciones guiadas) | Traducidas |
+| Etiquetas del diagrama, popovers y tooltips | Traducidas |
+| Artículo largo del pie de página (`Article.svelte`) | **En inglés**, sin traducir |
+| Fórmulas KaTeX (`Weights`, `Bias`, `Embedding`…) | **Sin traducir**, notación original |
+| El modelo | GPT-2 en inglés: las predicciones y los ejemplos precargados siguen siendo en inglés |
 
-## How to run locally
+### Criterios de traducción
 
-#### Prerequisites
+Se dejaron **sin traducir** los términos que el alumno va a reencontrar en la bibliografía:
+*transformer, token, embedding, self-attention, head, Query/Key/Value, softmax, logit, dropout, top-k, top-p, MLP, GELU*.
 
-- Node.js v20 or higher
-- NPM v10 or higher
+Se tradujeron: *codificación posicional, bloque Transformer, producto punto, máscara, puntajes de atención, pesos, sesgos, capa lineal, activación, normalización por capa, conexión residual, probabilidades, temperatura, estrategia de muestreo*.
 
-#### Steps
+El registro es impersonal ("se puede ver", "conviene probar"), sin marca regional.
+
+### Otros cambios respecto del original
+
+- Se quitó el aviso de recolección de datos con fines de investigación y su enlace al formulario de consentimiento: corresponden al estudio de los autores originales, no a este fork.
+- Se eliminó el workflow `sync.yml`, que sincronizaba a diario con upstream y habría sobrescrito la traducción.
+- `paths.base` apunta a `/transformer-explainer-es`.
+
+## Cómo correrlo localmente
+
+Requiere Node.js v20+ y NPM v10+.
 
 ```bash
-git clone https://github.com/poloclub/transformer-explainer.git
-cd transformer-explainer
+git clone https://github.com/dimacio/transformer-explainer-es.git
+cd transformer-explainer-es
 npm install
 npm run dev
 ```
 
-Then, on your web browser, access http://localhost:5173.
+Después, abrir http://localhost:5173.
 
-## Credits
+La primera carga descarga el modelo GPT-2 (~600 MB, partido en 63 fragmentos dentro de `static/model-v2/`). Mientras tanto se pueden usar los ejemplos precalculados.
 
-Transformer Explainer was created by <a href="https://aereeeee.github.io/" target="_blank">Aeree Cho</a>, <a href="https://www.linkedin.com/in/chaeyeonggracekim/" target="_blank">Grace C. Kim</a>, <a href="https://alexkarpekov.com/" target="_blank">Alexander Karpekov</a>, <a href="https://alechelbling.com/" target="_blank">Alec Helbling</a>, <a href="https://zijie.wang/" target="_blank">Jay Wang</a>, <a href="https://seongmin.xyz/" target="_blank">Seongmin Lee</a>, <a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a>, and <a href="https://poloclub.github.io/polochau/" target="_blank">Polo Chau</a> at the Georgia Institute of Technology.
+> Si `npm install` falla con `ERESOLVE`: borrar `package-lock.json` y volver a correrlo. El lockfile de upstream quedó atado a `vite@5` y este fork usa `vite@7`.
 
-## Citation
+## Cómo publicarlo en GitHub Pages
+
+```bash
+npm run build
+npm run deploy
+```
+
+`deploy` publica la carpeta `build` en la rama `gh-pages`. En **Settings → Pages** del repositorio hay que elegir esa rama como origen.
+
+## Créditos
+
+Transformer Explainer fue creado por <a href="https://aereeeee.github.io/" target="_blank">Aeree Cho</a>, <a href="https://www.linkedin.com/in/chaeyeonggracekim/" target="_blank">Grace C. Kim</a>, <a href="https://alexkarpekov.com/" target="_blank">Alexander Karpekov</a>, <a href="https://alechelbling.com/" target="_blank">Alec Helbling</a>, <a href="https://zijie.wang/" target="_blank">Jay Wang</a>, <a href="https://seongmin.xyz/" target="_blank">Seongmin Lee</a>, <a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a> y <a href="https://poloclub.github.io/polochau/" target="_blank">Polo Chau</a> en el Georgia Institute of Technology.
+
+Este fork solo aporta la traducción del texto al castellano.
+
+## Paper original
+
+[**Transformer Explainer: Learning LLM Transformers with Interactive Visual Explanation and Experimentation**](https://dl.acm.org/doi/pdf/10.1145/3772318.3791725).
+Aeree Cho, Grace C. Kim, Alexander Karpekov, Seongmin Lee, Alec Helbling, Benjamin Hoover, Zijie J. Wang, Minsuk Kahng, Duen Horng Chau.
+_Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems._
 
 ```bibTeX
 @inproceedings{cho2026transformer,
@@ -50,16 +82,12 @@ Transformer Explainer was created by <a href="https://aereeeee.github.io/" targe
 }
 ```
 
-## License
+## Licencia
 
-The software is available under the [MIT License](https://github.com/poloclub/transformer-explainer/blob/main/LICENSE).
+[MIT](./LICENSE), igual que el original. El aviso de copyright de los autores originales se conserva sin cambios en el archivo `LICENSE`.
 
-## Contact
+## Otros explicadores del mismo grupo
 
-If you have any questions, feel free to [open an issue](https://github.com/poloclub/transformer-explainer/issues/new/choose) or contact [Aeree Cho](https://aereeeee.github.io/) or any of the contributors listed above.
-
-## More AI explainers to check out
-
-- [**Diffusion Explainer**](https://poloclub.github.io/diffusion-explainer) for learning how Stable Diffusion transforms text prompt into image
+- [**Diffusion Explainer**](https://poloclub.github.io/diffusion-explainer)
 - [**CNN Explainer**](https://poloclub.github.io/cnn-explainer)
-- [**GAN Lab**](https://poloclub.github.io/ganlab) for playing with Generative Adversarial Networks in browser
+- [**GAN Lab**](https://poloclub.github.io/ganlab)

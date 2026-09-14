@@ -147,7 +147,7 @@
 				class:selectDisabled
 				class="select-button inline-flex shrink-0 items-center justify-center border border-s-0 border-gray-200 bg-white px-3 py-2 text-center text-xs font-medium text-gray-900 first:rounded-s-lg first:border-s last:rounded-e-lg"
 			>
-				Examples<ChevronDownOutline class="pointer-events-none h-4 w-4 text-gray-500" />
+				Ejemplos<ChevronDownOutline class="pointer-events-none h-4 w-4 text-gray-500" />
 			</button>
 			<Dropdown bind:open={dropdownOpen} class="example-dropdown">
 				{#each inputTextExample as text, index}
@@ -180,7 +180,7 @@
 						bind:this={inputRef}
 						contenteditable={!disabled}
 						class="text-box"
-						placeholder="Test your own input text"
+						placeholder="Escribir un texto propio"
 						on:focus={onFocusInput}
 						on:input={onInput}
 						on:keydown={handleKeyDown}
@@ -212,14 +212,14 @@
 				{/if}
 				{#if $isMobile}
 					<span class="helper-text"
-						>Try the examples. Please use a desktop computer to input GPT-2 prompts directly.</span
+						>Se pueden probar los ejemplos. Para escribir prompts directamente en GPT-2 hace falta una computadora de escritorio.</span
 					>
 				{:else if $isLoaded && $isFetchingModel}
 					<span class="helper-text"
-						>Try the examples while GPT-2 model is being downloaded (600MB)</span
+						>Se pueden probar los ejemplos mientras se descarga el modelo GPT-2 (600 MB)</span
 					>
 				{:else if exceedLimit}
-					<span class="helper-text">You can enter up to {wordLimit} words.</span>
+					<span class="helper-text">Se pueden ingresar hasta {wordLimit} palabras.</span>
 				{/if}
 			</div>
 		</ButtonGroup>
@@ -233,7 +233,7 @@
 			type="submit"
 			on:click={handleSubmit}
 		>
-			Generate
+			Generar
 		</button>
 	</form>
 	<div class="parameters" data-click="input-parameters">
