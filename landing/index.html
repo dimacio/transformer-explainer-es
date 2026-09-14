@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Transformer Explainer en castellano — cómo funciona un LLM, paso a paso</title>
+		<title>Transformers — cómo funciona un LLM, paso a paso</title>
 		<meta
 			name="description"
 			content="Visualización interactiva que muestra cómo un Transformer predice la palabra siguiente, con un GPT-2 corriendo en vivo dentro del navegador. Traducción al castellano del Transformer Explainer del Polo Club of Data Science."
@@ -99,13 +99,6 @@
 				color: transparent;
 			}
 
-			.subtitulo {
-				font-size: 0.95rem;
-				font-weight: 600;
-				color: var(--tinta-suave);
-				margin: 4px 0 0;
-			}
-
 			.bajada {
 				font-size: 1.1rem;
 				margin: 22px 0 0;
@@ -147,6 +140,34 @@
 			.pista {
 				font-size: 0.88rem;
 				color: var(--tinta-suave);
+			}
+
+			/* ----------------------------------------------------------- prisma */
+
+			.prisma {
+				display: block;
+				width: 100%;
+				height: auto;
+				margin: 30px 0 0;
+			}
+
+			.prisma .rotulo {
+				font-family: ui-sans-serif, system-ui, sans-serif;
+				font-size: 19px;
+				font-weight: 600;
+			}
+
+			.prisma .tenue {
+				font-family: ui-sans-serif, system-ui, sans-serif;
+				font-size: 17px;
+				fill: #94a3b8;
+			}
+
+			.epigrafe {
+				font-size: 0.9rem;
+				color: var(--tinta-suave);
+				margin: 10px 0 0;
+				text-align: center;
 			}
 
 			/* ------------------------------------------------------------ pasos */
@@ -236,8 +257,7 @@
 	</head>
 	<body>
 		<main>
-			<h1 class="marca">Transformer Explainer</h1>
-			<p class="subtitulo">en castellano</p>
+			<h1 class="marca">Transformers</h1>
 
 			<p class="bajada">
 				Cómo un modelo de lenguaje decide la palabra siguiente, paso a paso y con todas las
@@ -249,6 +269,73 @@
 				<a class="entrar" href="./app/">Entrar a la herramienta</a>
 				<span class="pista">Lo que se ve atrás es, justamente, la herramienta</span>
 			</div>
+
+			<!-- Triangulo: vertice (310,28), base de (262,140) a (358,140).
+			     El haz entra por la cara izquierda a y=96, que cae en x=281, y
+			     sale por la cara derecha en (341,100). Las tres salidas usan los
+			     colores exactos que la app da a Query, Key y Value. -->
+			<svg class="prisma" viewBox="0 0 640 180" role="img" aria-labelledby="tit-prisma">
+				<title id="tit-prisma">
+					El vector de un token atraviesa un prisma y sale descompuesto en tres: Query en
+					azul, Key en rojo y Value en verde.
+				</title>
+				<defs>
+					<!-- userSpaceOnUse: el haz es una linea horizontal, y su bounding box
+					     de altura cero hace que un gradiente objectBoundingBox no pinte -->
+					<linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="22" y1="96" x2="281" y2="96">
+						<stop offset="0" stop-color="#cbd5e1" />
+						<stop offset="1" stop-color="#475569" />
+					</linearGradient>
+				</defs>
+
+				<path
+					d="M22 96 H281"
+					stroke="url(#haz)"
+					stroke-width="11"
+					stroke-linecap="round"
+					fill="none"
+				/>
+				<text x="22" y="74" class="tenue">el vector del token</text>
+
+				<path
+					d="M310 28 L358 140 L262 140 Z"
+					fill="rgba(255, 255, 255, 0.55)"
+					stroke="#94a3b8"
+					stroke-width="2"
+					stroke-linejoin="round"
+				/>
+
+				<path
+					d="M341 100 C 400 100, 410 48, 486 48"
+					stroke="#3b82f6"
+					stroke-width="8"
+					stroke-linecap="round"
+					fill="none"
+				/>
+				<path
+					d="M341 100 C 400 100, 420 96, 486 96"
+					stroke="#ef4444"
+					stroke-width="8"
+					stroke-linecap="round"
+					fill="none"
+				/>
+				<path
+					d="M341 100 C 400 100, 410 144, 486 144"
+					stroke="#22c55e"
+					stroke-width="8"
+					stroke-linecap="round"
+					fill="none"
+				/>
+
+				<text x="502" y="55" class="rotulo" fill="#3b82f6">Query</text>
+				<text x="502" y="103" class="rotulo" fill="#ef4444">Key</text>
+				<text x="502" y="151" class="rotulo" fill="#22c55e">Value</text>
+			</svg>
+
+			<p class="epigrafe">
+				Eso es la <em>self-attention</em>: un vector entra y sale descompuesto en tres. Son
+				los mismos tres colores que vas a ver adentro.
+			</p>
 
 			<hr class="separador" />
 
