@@ -36,7 +36,11 @@ El registro es impersonal ("se puede ver", "conviene probar"), sin marca regiona
 
 ## Cómo correrlo localmente
 
-Requiere Node.js v20+ y NPM v10+.
+Requiere Node.js v20+ y NPM v10+ para `npm install`.
+
+> **`npm ci` es más exigente:** el `package-lock.json` de este repo lo generó npm 11, y npm 10 arma
+> el árbol de dependencias distinto, así que lo rechaza (`Missing: @typescript-eslint/types...`).
+> Para `npm ci` hace falta Node 24+ (que trae npm 11); con `npm install` anda cualquier Node 20+.
 
 ```bash
 git clone https://github.com/dimacio/transformer-explainer-es.git
