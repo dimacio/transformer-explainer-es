@@ -153,8 +153,23 @@
 
 			.prisma .rotulo {
 				font-family: ui-sans-serif, system-ui, sans-serif;
-				font-size: 19px;
+				font-size: 20px;
 				font-weight: 600;
+				dominant-baseline: middle;
+			}
+
+			/* Sans pesada a proposito: con trazos gruesos los solapamientos son
+			   grandes y la suma aditiva se ve. Una pixelada fina casi no cruza. */
+			.prisma .letra {
+				font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+				font-weight: 800;
+				font-size: 54px;
+				text-anchor: middle;
+				dominant-baseline: middle;
+			}
+
+			.prisma .proyectada {
+				font-size: 38px;
 			}
 
 			.prisma .tenue {
@@ -270,71 +285,40 @@
 				<span class="pista">Lo que se ve atrás es, justamente, la herramienta</span>
 			</div>
 
-			<!-- Triangulo: vertice (310,28), base de (262,140) a (358,140).
-			     El haz entra por la cara izquierda a y=96, que cae en x=281, y
-			     sale por la cara derecha en (341,100). Las tres salidas usan los
-			     colores exactos que la app da a Query, Key y Value. -->
-			<svg class="prisma" viewBox="0 0 640 180" role="img" aria-labelledby="tit-prisma">
-				<title id="tit-prisma">
-					El vector de un token atraviesa un prisma y sale descompuesto en tres: Query en
-					azul, Key en rojo y Value en verde.
-				</title>
-				<defs>
-					<!-- userSpaceOnUse: el haz es una linea horizontal, y su bounding box
-					     de altura cero hace que un gradiente objectBoundingBox no pinte -->
-					<linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="22" y1="96" x2="281" y2="96">
-						<stop offset="0" stop-color="#cbd5e1" />
-						<stop offset="1" stop-color="#475569" />
-					</linearGradient>
-				</defs>
-
-				<path
-					d="M22 96 H281"
-					stroke="url(#haz)"
-					stroke-width="11"
-					stroke-linecap="round"
-					fill="none"
-				/>
-				<text x="22" y="74" class="tenue">el vector del token</text>
-
-				<path
-					d="M310 28 L358 140 L262 140 Z"
-					fill="rgba(255, 255, 255, 0.55)"
-					stroke="#94a3b8"
-					stroke-width="2"
-					stroke-linejoin="round"
-				/>
-
-				<path
-					d="M341 100 C 400 100, 410 48, 486 48"
-					stroke="#3b82f6"
-					stroke-width="8"
-					stroke-linecap="round"
-					fill="none"
-				/>
-				<path
-					d="M341 100 C 400 100, 420 96, 486 96"
-					stroke="#ef4444"
-					stroke-width="8"
-					stroke-linecap="round"
-					fill="none"
-				/>
-				<path
-					d="M341 100 C 400 100, 410 144, 486 144"
-					stroke="#22c55e"
-					stroke-width="8"
-					stroke-linecap="round"
-					fill="none"
-				/>
-
-				<text x="502" y="55" class="rotulo" fill="#3b82f6">Query</text>
-				<text x="502" y="103" class="rotulo" fill="#ef4444">Key</text>
-				<text x="502" y="151" class="rotulo" fill="#22c55e">Value</text>
+			<svg class="prisma" viewBox="0 56 700 242.1" role="img" aria-labelledby="tit-prisma">
+			  <title id="tit-prisma">Las letras Q, K y V superpuestas entran a un prisma como un solo haz y salen separadas: Key en rojo, Value en verde y Query en azul, cada una desviada segun su indice de refraccion.</title>
+			  <defs>
+			    <linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="128" y1="228.1" x2="301" y2="128.2">
+			      <stop offset="0" stop-color="#e2e8f0" /><stop offset="1" stop-color="#cbd5e1" />
+			    </linearGradient>
+			  </defs>
+			  <rect x="545" y="110.2" width="145" height="148.8" rx="10" fill="#0f172a" />
+			  <g style="isolation: isolate">
+			    <rect x="12" y="170.1" width="116" height="116" rx="10" fill="#0f172a" />
+			    <text x="70" y="215.1" class="letra" fill="#ef4444" style="mix-blend-mode: screen">K</text>
+			    <text x="58.7" y="234.6" class="letra" fill="#22c55e" style="mix-blend-mode: screen">V</text>
+			    <text x="81.3" y="234.6" class="letra" fill="#3b82f6" style="mix-blend-mode: screen">Q</text>
+			  </g>
+			  <path d="M128 228.1 L301 128.2" stroke="url(#haz)" stroke-width="11" stroke-linecap="round" fill="none" />
+			  <path d="M330 78 L388 178.5 L272 178.5 Z" fill="rgba(255,255,255,.5)" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round" />
+			  <path d="M301 128.2 L355.6 122.4 L545 144.2" stroke="#ef4444" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+			  <path d="M301 128.2 L357.3 125.3 L545 179.8" stroke="#22c55e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+			  <path d="M301 128.2 L358.8 127.8 L545 225" stroke="#3b82f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+			  <text x="583" y="144.2" class="letra proyectada" fill="#ef4444">K</text>
+			  <text x="617" y="144.2" class="rotulo" fill="#ef4444">Key</text>
+			  <text x="583" y="179.8" class="letra proyectada" fill="#22c55e">V</text>
+			  <text x="617" y="179.8" class="rotulo" fill="#22c55e">Value</text>
+			  <text x="583" y="225" class="letra proyectada" fill="#3b82f6">Q</text>
+			  <text x="617" y="225" class="rotulo" fill="#3b82f6">Query</text>
 			</svg>
 
 			<p class="epigrafe">
-				Eso es la <em>self-attention</em>: un vector entra y sale descompuesto en tres. Son
-				los mismos tres colores que vas a ver adentro.
+				El embedding de un token lleva las tres cosas juntas — como las letras superpuestas,
+				donde el rojo, el verde y el azul se suman y dan blanco. La <em>self-attention</em>
+				las separa: <span style="color: #ef4444">Key</span>,
+				<span style="color: #22c55e">Value</span> y
+				<span style="color: #3b82f6">Query</span>, en los mismos colores que vas a ver
+				adentro.
 			</p>
 
 			<hr class="separador" />
