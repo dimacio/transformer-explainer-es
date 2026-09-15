@@ -32,7 +32,8 @@ El registro es impersonal ("se puede ver", "conviene probar"), sin marca regiona
 
 - Se quitó el aviso de recolección de datos con fines de investigación y su enlace al formulario de consentimiento: corresponden al estudio de los autores originales, no a este fork.
 - Se eliminó el workflow `sync.yml`, que sincronizaba a diario con upstream y habría sobrescrito la traducción.
-- `paths.base` apunta a `/transformer-explainer-es`.
+- El sitio tiene una **portada propia** (`landing/index.html`) en la raíz, con un solo botón que lleva a la herramienta. La app queda en `/app`, así que `paths.base` apunta a `/transformer-explainer-es/app`.
+- El **tokenizador de GPT-2** (`tokenizer.json` y `tokenizer_config.json`) se sirve desde el propio sitio, en `static/models/Xenova/gpt2/`. En el original, transformers.js lo busca en `/models/` en la raíz del dominio, recibe dos 404 y recién entonces lo baja de Hugging Face en cada carga; acá `env.localModelPath` apunta a `${base}/models/` y el Hub queda sólo como respaldo.
 - Se corrigió un desfase del generador: a partir del segundo "Generar", el diagrama procesaba la entrada anterior y quedaba un token atrás del texto. El callback que reacciona al cambio de entrada leía `$inputText` en vez del valor que recibe, y con las versiones actuales de Svelte ese valor llega atrasado (`src/routes/+page.svelte`).
 - Se reactivaron los popovers de ayuda que el original tiene comentados, cada uno con su botón "Leer más" al párrafo del artículo: **temperatura**, **estrategia de muestreo**, **embedding de token**, **codificación posicional**, **normalización por capa**, **dropout**, **activación GELU** y **conexión residual**. Se quitó el enlace al manual externo en inglés (`transformer-explainer.github.io/textbook`), que no se renderizaba.
 
@@ -53,18 +54,30 @@ npm run dev
 
 Después, abrir http://localhost:5173.
 
-La primera carga descarga el modelo GPT-2 (~600 MB, partido en 63 fragmentos dentro de `static/model-v2/`). Mientras tanto se pueden usar los ejemplos precalculados.
+`npm run dev` sirve sólo la app. La portada (`landing/index.html`) es HTML estático y se puede abrir directo en el navegador; en el sitio publicado su botón lleva a `/app`.
+
+La primera carga descarga el modelo GPT-2 (~600 MB, partido en 63 fragmentos dentro de `static/model-v2/`). Mientras tanto se pueden usar los ejemplos precalculados. El tokenizador se carga desde `static/models/`, sin salir a Hugging Face.
 
 > Si `npm install` falla con `ERESOLVE`: borrar `package-lock.json` y volver a correrlo. El lockfile de upstream quedó atado a `vite@5` y este fork usa `vite@7`.
 
 ## Cómo publicarlo en GitHub Pages
 
-```bash
-npm run build
-npm run deploy
+Publica el workflow `.github/workflows/deploy.yml` con cada push a `main` (o a mano desde la pestaña Actions). En **Settings → Pages** del repositorio el origen tiene que ser **GitHub Actions**.
+
+El workflow compila con `npm run build`, mueve el resultado a `build/app` y copia `landing/` a la raíz, de modo que el sitio queda así:
+
+```
+/            portada (landing/index.html)
+/app/        la herramienta
+/app/models/ tokenizador de GPT-2
 ```
 
-`deploy` publica la carpeta `build` en la rama `gh-pages`. En **Settings → Pages** del repositorio hay que elegir esa rama como origen.
+El modelo GPT-2 ya está en el repo, así que el runner lo lee del checkout y no hace falta subirlo desde la máquina de uno. Para reproducir el armado localmente:
+
+```bash
+npm run build
+mv build sitio-app && mkdir build && mv sitio-app build/app && cp -r landing/. build/
+```
 
 ## Créditos
 
