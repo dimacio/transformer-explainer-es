@@ -33,6 +33,7 @@ El registro es impersonal ("se puede ver", "conviene probar"), sin marca regiona
 - Se quitó el aviso de recolección de datos con fines de investigación y su enlace al formulario de consentimiento: corresponden al estudio de los autores originales, no a este fork.
 - Se eliminó el workflow `sync.yml`, que sincronizaba a diario con upstream y habría sobrescrito la traducción.
 - `paths.base` apunta a `/transformer-explainer-es`.
+- Se corrigió un desfase del generador: a partir del segundo "Generar", el diagrama procesaba la entrada anterior y quedaba un token atrás del texto. El callback que reacciona al cambio de entrada leía `$inputText` en vez del valor que recibe, y con las versiones actuales de Svelte ese valor llega atrasado (`src/routes/+page.svelte`).
 - Se reactivaron los popovers de ayuda que el original tiene comentados, cada uno con su botón "Leer más" al párrafo del artículo: **temperatura**, **estrategia de muestreo**, **embedding de token**, **codificación posicional**, **normalización por capa**, **dropout**, **activación GELU** y **conexión residual**. Se quitó el enlace al manual externo en inglés (`transformer-explainer.github.io/textbook`), que no se renderizaba.
 
 ## Cómo correrlo localmente

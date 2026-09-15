@@ -101,7 +101,11 @@
 	// Subscribe inputs
 	const cachedDataMap = [ex0, ex1, ex2, ex3, ex4];
 	const subscribeInputs = (tokenizer: PreTrainedTokenizer) => {
-		const runModelOrCache = () => {
+		// Recibe el texto como argumento. Dentro de un subscribe manual, el valor
+		// del store leido con el prefijo $ puede llegar un paso atrasado (la
+		// suscripcion del componente se registra despues y se actualiza mas tarde),
+		// y el modelo corria con la entrada anterior.
+		const runModelOrCache = (input: string) => {
 			if ($isFetchingModel || !$modelSession) {
 				const cachedData = cachedDataMap[$selectedExampleIdx];
 
@@ -116,14 +120,14 @@
 			// run model when input has changed
 			runModel({
 				tokenizer,
-				input: $inputText.trim(),
+				input: input.trim(),
 				temperature: $temperature,
 				sampling: $sampling
 			});
 		};
 
 		const unsubscribeInputText = inputText.subscribe((value) => {
-			runModelOrCache();
+			runModelOrCache(value);
 		});
 
 		let initialTemperature = true; // prevent initial redundant rendering
