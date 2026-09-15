@@ -6,7 +6,7 @@ Traducción al castellano de [**Transformer Explainer**](https://github.com/polo
 
 ## Demo
 
-- Esta traducción: `https://dimacio.github.io/transformer-explainer-es`
+- Esta traducción: [dimacio.github.io/transformer-explainer-es](https://dimacio.github.io/transformer-explainer-es/)
 - Original en inglés: [poloclub.github.io/transformer-explainer](http://poloclub.github.io/transformer-explainer)
 
 ## Qué se tradujo y qué no
