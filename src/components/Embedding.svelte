@@ -198,14 +198,12 @@
 					<div class="subtitle flex items-center gap-1">
 						<TextbookTooltip id="token-embedding"><span>Embedding<br />de token</span></TextbookTooltip
 						>
-						<!-- <HelpPopover
-							id="token-embedding"
-							goTo="article-token-embedding"
+						<HelpPopover id="token-embedding-help" goTo="article-token-embedding"
 							>{`Convierte los tokens en representaciones
 numéricas usando embeddings derivados
 de un vocabulario predefinido, que capturan
 su significado semántico.`}</HelpPopover
-						> -->
+						>
 					</div>
 					{#each $tokens as token, index}
 						<div class="token-id flex items-center">
@@ -249,13 +247,11 @@ su significado semántico.`}</HelpPopover
 						<TextbookTooltip id="positional-encoding">
 							<span>Codificación<br />posicional</span>
 						</TextbookTooltip>
-						<!-- <HelpPopover
-							id="position-embedding"
-							goTo="article-positional-embedding"
+						<HelpPopover id="position-embedding-help" goTo="article-positional-embedding"
 							>{`Convierte la posición de cada token en
 representaciones numéricas que capturan
 su orden dentro de la secuencia.`}</HelpPopover
-						> -->
+						>
 					</div>
 					{#each $tokens as token, index}
 						<div class="cell flex items-center">

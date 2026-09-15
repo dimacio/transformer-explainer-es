@@ -90,7 +90,7 @@
 			/>
 		{/each}
 	</div>
-	<!-- <ActivationPopover triggeredBy={`#${id}`} offset={1} /> -->
+	<ActivationPopover triggeredBy={`#${id}`} offset={1} />
 {:else if type === 'dropout'}
 	<div
 		{id}
@@ -118,7 +118,7 @@
 			/>
 		{/each}
 	</div>
-	<!-- <DropoutPopover triggeredBy={`#${id}`} offset={1} /> -->
+	<DropoutPopover triggeredBy={`#${id}`} offset={1} />
 {:else if type === 'ln'}
 	<div
 		{id}
@@ -146,7 +146,7 @@
 			/>
 		{/each}
 	</div>
-	<!-- <LayerNormPopover triggeredBy={`#${id}`} /> -->
+	<LayerNormPopover triggeredBy={`#${id}`} />
 {:else if type === 'residual-start'}
 	<div
 		data-click="residual-start"
@@ -171,7 +171,7 @@
 			/>
 		{/each}
 	</div>
-	<!-- <ResidualPopover reference={`#${id}-start`} triggeredBy={`[id^='${id}-']`} offset={1} /> -->
+	<ResidualPopover reference={`#${id}-start`} triggeredBy={`[id^='${id}-']`} offset={1} />
 {:else if type === 'residual-end'}
 	<div
 		id={`${id}-end`}
