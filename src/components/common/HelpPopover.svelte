@@ -6,7 +6,6 @@
 	export let id: string;
 	export let placement: string = 'bottom';
 	export let goTo: string | undefined = undefined;
-	export let textbook: string | undefined = undefined;
 
 	let startTime;
 	const onShow = (e) => {
@@ -54,18 +53,6 @@
 	}}
 	><div class="help-content">
 		<slot />
-		{#if textbook}
-			<div class="textbook-link">
-				<a
-					href={`https://transformer-explainer.github.io/textbook/${textbook}`}
-					target="_blank"
-					data-click={`textbook-link-${id}`}
-					class="text-blue-600 hover:underline"
-				>
-					Abrir el manual
-				</a>
-			</div>
-		{/if}
 		{#if goTo}
 			<div
 				data-click={`read-more-btn-${id}`}

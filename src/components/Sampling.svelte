@@ -31,15 +31,13 @@
 				<TextbookTooltip id="sampling">
 					<div>Muestreo</div></TextbookTooltip
 				>
-				<!-- <HelpPopover
+				<HelpPopover
 					id="sampling-help"
-					
 					goTo="article-sampling"
-					textbook="sampling"
 				>
 					{`Cambia cómo se elige el token siguiente
 a partir de la distribución de probabilidad.`}
-				</HelpPopover> -->
+				</HelpPopover>
 			</div>
 			<div class="sampling-type-input flex">
 				<Radio

@@ -36,11 +36,11 @@
 			<TextbookTooltip id="temperature">
 				<div>Temperatura</div></TextbookTooltip
 			>
-			<!-- <HelpPopover id="temperature-help"  goTo="article-temperature">
+			<HelpPopover id="temperature-help" goTo="article-temperature">
 				{`Cambia la distribución de probabilidad
 de salida y el grado de azar
 del token siguiente.`}
-			</HelpPopover> -->
+			</HelpPopover>
 		</div>
 	</Slider>
 </div>

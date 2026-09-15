@@ -6,92 +6,93 @@
 
 <div id="description">
 	<div class="article-section" data-click="article-intro">
-		<h1>What is a Transformer?</h1>
+		<h1>¿Qué es un Transformer?</h1>
 
 		<p>
-			Transformer is a neural network architecture that has fundamentally changed the approach to
-			Artificial Intelligence. Transformer was first introduced in the seminal paper
+			El Transformer es una arquitectura de red neuronal que cambió de raíz la forma de encarar la
+			inteligencia artificial. Se presentó en el paper fundacional
 			<a
 				href="https://dl.acm.org/doi/10.5555/3295222.3295349"
 				title="ACM Digital Library"
 				target="_blank">"Attention is All You Need"</a
 			>
-			in 2017 and has since become the go-to architecture for deep learning models, powering text-generative
-			models like OpenAI's <strong>GPT</strong>, Meta's <strong>Llama</strong>, and Google's
-			<strong>Gemini</strong>. Beyond text, Transformer is also applied in
+			en 2017 y desde entonces se volvió la arquitectura de referencia para los modelos de deep learning:
+			es la que hace funcionar a modelos generativos de texto como <strong>GPT</strong> de OpenAI,
+			<strong>Llama</strong> de Meta y <strong>Gemini</strong> de Google. Más allá del texto, el Transformer
+			también se aplica a la
 			<a
 				href="https://huggingface.co/learn/audio-course/en/chapter3/introduction"
 				title="Hugging Face"
-				target="_blank">audio generation</a
-			>,
+				target="_blank">generación de audio</a
+			>, al
 			<a
 				href="https://huggingface.co/learn/computer-vision-course/unit3/vision-transformers/vision-transformers-for-image-classification"
 				title="Hugging Face"
-				target="_blank">image recognition</a
-			>,
+				target="_blank">reconocimiento de imágenes</a
+			>, a la
 			<a href="https://elifesciences.org/articles/82819" title="eLife"
-				>protein structure prediction</a
-			>, and even
+				>predicción de estructura de proteínas</a
+			>
+			e incluso a
 			<a
 				href="https://www.deeplearning.ai/the-batch/reinforcement-learning-plus-transformers-equals-efficiency/"
 				title="Deep Learning AI"
-				target="_blank">game playing</a
-			>, demonstrating its versatility across numerous domains.
+				target="_blank">jugar juegos</a
+			>, lo que muestra su versatilidad en dominios muy distintos.
 		</p>
 		<p>
-			Fundamentally, text-generative Transformer models operate on the principle of <strong
-				>next-token prediction</strong
-			>: given a text prompt from the user, what is the
-			<em>most probable next token (a word or part of a word)</em> that will follow this input? The core
-			innovation and power of Transformers lie in their use of self-attention mechanism, which allows
-			them to process entire sequences and capture long-range dependencies more effectively than previous
-			architectures.
+			En el fondo, los Transformers generativos de texto funcionan sobre el principio de la <strong
+				>predicción del token siguiente</strong
+			>: dado un texto que escribe el usuario, ¿cuál es el
+			<em>token más probable (una palabra o parte de una palabra)</em> que sigue a esa entrada? La innovación
+			central y la potencia del Transformer están en su mecanismo de self-attention, que le permite procesar
+			secuencias enteras y capturar dependencias de larga distancia mejor que las arquitecturas anteriores.
 		</p>
 		<p>
-			GPT-2 family of models are prominent examples of text-generative Transformers. Transformer
-			Explainer is powered by the
+			La familia de modelos GPT-2 es un ejemplo destacado de Transformer generativo de texto.
+			Transformer Explainer funciona con el modelo
 			<a href="https://huggingface.co/openai-community/gpt2" title="Hugging Face" target="_blank"
 				>GPT-2</a
 			>
-			(small) model which has 124 million parameters. While it is not the latest or most powerful Transformer
-			model, it shares many of the same architectural components and principles found in the current
-			state-of-the-art models making it an ideal starting point for understanding the basics.
+			(small), que tiene 124 millones de parámetros. No es el Transformer más reciente ni el más potente,
+			pero comparte muchos de los componentes y principios de los modelos del estado del arte actual, y
+			eso lo vuelve un punto de partida ideal para entender los fundamentos.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-overview">
-		<h1>Transformer Architecture</h1>
+		<h1>Arquitectura del Transformer</h1>
 
 		<p>
-			Every text-generative Transformer consists of these <strong>three key components</strong>:
+			Todo Transformer generativo de texto tiene estos <strong>tres componentes clave</strong>:
 		</p>
 		<ol>
 			<li>
-				<strong class="bold-purple">Embedding</strong>: Text input is divided into smaller units
-				called tokens, which can be words or subwords. These tokens are converted into numerical
-				vectors called embeddings, which capture the semantic meaning of words.
+				<strong class="bold-purple">Embedding</strong>: el texto de entrada se divide en unidades
+				más chicas llamadas tokens, que pueden ser palabras o partes de palabras. Esos tokens se
+				convierten en vectores numéricos llamados embeddings, que capturan el significado semántico
+				de las palabras.
 			</li>
 			<li>
-				<strong class="bold-purple">Transformer Block</strong> is the fundamental building block of
-				the model that processes and transforms the input data. Each block includes:
+				El <strong class="bold-purple">bloque Transformer</strong> es la unidad fundamental del
+				modelo: procesa y transforma los datos de entrada. Cada bloque incluye:
 				<ul class="">
 					<li>
-						<strong>Attention Mechanism</strong>, the core component of the Transformer block. It
-						allows tokens to communicate with other tokens, capturing contextual information and
-						relationships between words.
+						El <strong>mecanismo de atención</strong>, el componente central del bloque. Permite que
+						los tokens se comuniquen entre sí, capturando información contextual y las relaciones
+						entre palabras.
 					</li>
 					<li>
-						<strong>MLP (Multilayer Perceptron) Layer</strong>, a feed-forward network that operates
-						on each token independently. While the goal of the attention layer is to route
-						information between tokens, the goal of the MLP is to refine each token's
-						representation.
+						La <strong>capa MLP (perceptrón multicapa)</strong>, una red feed-forward que opera sobre
+						cada token de manera independiente. Mientras la capa de atención busca hacer circular
+						información entre tokens, el objetivo del MLP es refinar la representación de cada uno.
 					</li>
 				</ul>
 			</li>
 			<li>
-				<strong class="bold-purple">Output Probabilities</strong>: The final linear and softmax
-				layers transform the processed embeddings into probabilities, enabling the model to make
-				predictions about the next token in a sequence.
+				<strong class="bold-purple">Probabilidades de salida</strong>: las capas finales, lineal y
+				softmax, transforman los embeddings procesados en probabilidades, lo que le permite al modelo
+				predecir el token siguiente de la secuencia.
 			</li>
 		</ol>
 	</div>
@@ -99,52 +100,53 @@
 	<div class="article-section" id="embedding" data-click="article-embedding">
 		<h2>Embedding</h2>
 		<p>
-			Let's say you want to generate text using a Transformer model. You add the prompt like this
-			one: <code>“Data visualization empowers users to”</code>. This input needs to be converted
-			into a format that the model can understand and process. That is where embedding comes in: it
-			transforms the text into a numerical representation that the model can work with. To convert a
-			prompt into embedding, we need to 1) tokenize the input, 2) obtain token embeddings, 3) add
-			positional information, and finally 4) add up token and position encodings to get the final
-			embedding. Let’s see how each of these steps is done.
+			Supongamos que se quiere generar texto con un Transformer. Se escribe un prompt como este:
+			<code>“Data visualization empowers users to”</code>. Esa entrada hay que convertirla a un formato
+			que el modelo pueda entender y procesar. Ahí entra el embedding: transforma el texto en una
+			representación numérica con la que el modelo puede trabajar. Para convertir un prompt en
+			embedding hace falta 1) tokenizar la entrada, 2) obtener los embeddings de token, 3) agregar
+			información de posición y, finalmente, 4) sumar las codificaciones de token y de posición para
+			obtener el embedding final. Veamos cada paso.
 		</p>
 		<div class="figure">
 			<img src="./article_assets/embedding.png" width="65%" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">1</span>. Expanding the Embedding layer view, showing how the
-			input prompt is converted to a vector representation. The process involves
-			<span class="fig-numbering">(1)</span> Tokenization, (2) Token Embedding, (3) Positional Encoding,
-			and (4) Final Embedding.
+			Figura <span class="attention">1</span>. La capa de embedding expandida, mostrando cómo el
+			prompt de entrada se convierte en una representación vectorial. El proceso involucra
+			<span class="fig-numbering">(1)</span> tokenización, (2) embedding de token, (3) codificación posicional
+			y (4) embedding final.
 		</div>
 		<div class="article-subsection">
-			<h3>Step 1: Tokenization</h3>
+			<h3>Paso 1: tokenización</h3>
 			<p>
-				Tokenization is the process of breaking down the input text into smaller, more manageable
-				pieces called tokens. These tokens can be a word or a subword. The words <code>"Data"</code>
-				and <code>"visualization"</code> correspond to unique tokens, while the word
+				La tokenización es el proceso de partir el texto de entrada en pedazos más chicos y
+				manejables, llamados tokens. Un token puede ser una palabra o una parte de una palabra. Las
+				palabras <code>"Data"</code>
+				y <code>"visualization"</code> corresponden cada una a un token único, mientras que la palabra
 				<code>"empowers"</code>
-				is split into two tokens. The full vocabulary of tokens is decided before training the model:
-				GPT-2's vocabulary has <code>50,257</code> unique tokens. Now that we split our input text into
-				tokens with distinct IDs, we can obtain their vector representation from embeddings.
+				se parte en dos tokens. El vocabulario completo de tokens se decide antes de entrenar el modelo:
+				el de GPT-2 tiene <code>50,257</code> tokens únicos. Ahora que el texto quedó partido en tokens
+				con IDs distintos, se puede obtener su representación vectorial a partir de los embeddings.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-token-embedding">
-			<h3>Step 2. Token Embedding</h3>
+			<h3>Paso 2: embedding de token</h3>
 			<p>
-				GPT-2 (small) represents each token in the vocabulary as a 768-dimensional vector; the
-				dimension of the vector depends on the model. These embedding vectors are stored in a matrix
-				of shape <code>(50,257, 768)</code>, containing approximately 39 million parameters! This
-				extensive matrix allows the model to assign semantic meaning to each token, in the sense
-				that tokens with similar usage or meaning in language are placed close together in this
-				high-dimensional space, while dissimilar tokens are farther apart.
+				GPT-2 (small) representa cada token del vocabulario como un vector de 768 dimensiones; la
+				dimensión del vector depende del modelo. Esos vectores de embedding se guardan en una matriz
+				de forma <code>(50,257, 768)</code>, ¡que contiene alrededor de 39 millones de parámetros!
+				Esa matriz enorme le permite al modelo asignarle un significado semántico a cada token, en el
+				sentido de que los tokens con uso o significado parecido quedan cerca unos de otros en ese
+				espacio de alta dimensión, y los distintos quedan lejos.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-positional-embedding">
-			<h3>Step 3. Positional Encoding</h3>
+			<h3>Paso 3: codificación posicional</h3>
 			<p>
-				The Embedding layer also encodes information about each token's position in the input
-				prompt. Different models use various methods for positional encoding. GPT-2 trains its own
-				positional encoding matrix from scratch, integrating it directly into the training process.
+				La capa de embedding también codifica información sobre la posición de cada token dentro del
+				prompt. Cada modelo usa métodos distintos de codificación posicional. GPT-2 entrena su propia
+				matriz de codificación posicional desde cero, integrándola directamente al entrenamiento.
 			</p>
 
 			<!-- <div class="article-subsection-l2">
@@ -190,42 +192,40 @@
   </div> -->
 		</div>
 		<div class="article-subsection">
-			<h3>Step 4. Final Embedding</h3>
+			<h3>Paso 4: embedding final</h3>
 			<p>
-				Finally, we sum the token and positional encodings to get the final embedding
-				representation. This combined representation captures both the semantic meaning of the
-				tokens and their position in the input sequence.
+				Por último, se suman las codificaciones de token y de posición para obtener la representación
+				final del embedding. Esa representación combinada captura tanto el significado semántico de
+				los tokens como su posición dentro de la secuencia de entrada.
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" data-click="article-transformer-block">
-		<h2>Transformer Block</h2>
+		<h2>El bloque Transformer</h2>
 
 		<p>
-			The core of the Transformer's processing lies in the Transformer block, which comprises
-			multi-head self-attention and a Multi-Layer Perceptron layer. Most models consist of multiple
-			such blocks that are stacked sequentially one after the other. The token representations
-			evolve through layers, from the first block to the last one, allowing the model to build up an
-			intricate understanding of each token. This layered approach leads to higher-order
-			representations of the input. The GPT-2 (small) model we are examining consists of <code
-				>12</code
-			> such blocks.
+			El núcleo del procesamiento está en el bloque Transformer, que se compone de multi-head
+			self-attention y una capa de perceptrón multicapa. La mayoría de los modelos apila varios de
+			estos bloques, uno detrás de otro. Las representaciones de los tokens van evolucionando capa a
+			capa, del primer bloque al último, y así el modelo construye una comprensión cada vez más
+			detallada de cada token. Ese enfoque en capas lleva a representaciones de orden superior de la
+			entrada. El modelo GPT-2 (small) que estamos mirando tiene <code>12</code> bloques de este tipo.
 		</p>
 	</div>
 
 	<div class="article-section" id="self-attention" data-click="article-attention">
-		<h3>Multi-Head Self-Attention</h3>
+		<h3>Multi-head self-attention</h3>
 		<p>
-			The self-attention mechanism enables the model to capture relationships among tokens in a
-			sequence, so that each token’s representation is influenced by the others. Multiple attention
-			heads allow the model to consider these relationships from different perspectives; for
-			example, one head may capture short-range syntactic links while another tracks broader
-			semantic context. In the following section, we will walk through how multi-head self-attention
-			is computed step by step.
+			El mecanismo de self-attention le permite al modelo capturar relaciones entre los tokens de una
+			secuencia, de modo que la representación de cada token quede influida por las de los demás.
+			Tener varias heads de atención le permite considerar esas relaciones desde perspectivas
+			distintas: una head puede capturar vínculos sintácticos de corto alcance mientras otra sigue el
+			contexto semántico más amplio. En la sección que sigue recorremos paso a paso cómo se calcula la
+			multi-head self-attention.
 		</p>
 		<div class="article-subsection-l2">
-			<h4>Step 1: Query, Key, and Value Matrices</h4>
+			<h4>Paso 1: matrices Query, Key y Value</h4>
 
 			<div class="figure pt-10">
 				<img src="./article_assets/QKV.png" width="80%" />
@@ -239,302 +239,302 @@
 				</div>
 			</div>
 			<div class="figure-caption">
-				Figure <span class="attention">2</span>. Computing Query, Key, and Value matrices from the
-				original embedding.
+				Figura <span class="attention">2</span>. Cálculo de las matrices Query, Key y Value a partir
+				del embedding original.
 			</div>
 
 			<p>
-				Each token's embedding vector is transformed into three vectors:
+				El vector de embedding de cada token se transforma en tres vectores:
 				<span class="q-color">Query (Q)</span>,
-				<span class="k-color">Key (K)</span>, and
-				<span class="v-color">Value (V)</span>. These vectors are derived by multiplying the input
-				embedding matrix with learned weight matrices for
+				<span class="k-color">Key (K)</span> y
+				<span class="v-color">Value (V)</span>. Esos vectores se obtienen multiplicando la matriz de
+				embeddings de entrada por matrices de pesos aprendidas para
 				<span class="q-color">Q</span>,
-				<span class="k-color">K</span>, and
-				<span class="v-color">V</span>. Here's a web search analogy to help us build some intuition
-				behind these matrices:
+				<span class="k-color">K</span> y
+				<span class="v-color">V</span>. Una analogía con una búsqueda web ayuda a construir la intuición
+				detrás de estas matrices:
 			</p>
 			<ul>
 				<li>
-					<strong class="q-color font-medium">Query (Q)</strong> is the search text you type in the
-					search engine bar. This is the token you want to
-					<em>"find more information about"</em>.
+					<strong class="q-color font-medium">Query (Q)</strong> es el texto que se escribe en la barra
+					del buscador. Es el token sobre el que se
+					<em>"quiere encontrar más información"</em>.
 				</li>
 				<li>
-					<strong class="k-color font-medium">Key (K)</strong> is the title of each web page in the search
-					result window. It represents the possible tokens the query can attend to.
+					<strong class="k-color font-medium">Key (K)</strong> es el título de cada página en la ventana
+					de resultados. Representa los tokens posibles a los que la query puede atender.
 				</li>
 				<li>
-					<strong class="v-color font-medium">Value (V)</strong> is the actual content of web pages shown.
-					Once we matched the appropriate search term (Query) with the relevant results (Key), we want
-					to get the content (Value) of the most relevant pages.
+					<strong class="v-color font-medium">Value (V)</strong> es el contenido real de las páginas que
+					se muestran. Una vez que el término de búsqueda (Query) se emparejó con los resultados relevantes
+					(Key), lo que se quiere es el contenido (Value) de las páginas más pertinentes.
 				</li>
 			</ul>
 			<p>
-				By using these QKV values, the model can calculate attention scores, which determine how
-				much focus each token should receive when generating predictions.
+				Con esos valores Q, K y V, el modelo puede calcular los puntajes de atención, que determinan
+				cuánta atención debe recibir cada token al generar las predicciones.
 			</p>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 2: Multi-Head Splitting</h4>
+			<h4>Paso 2: división en varias heads</h4>
 			<p>
-				<span class="q-color">Query</span>, <span class="k-color">key</span>, and
+				Los vectores <span class="q-color">Query</span>, <span class="k-color">Key</span> y
 				<span class="v-color">Value</span>
-				vectors are split into multiple heads—in GPT-2 (small)'s case, into
-				<code>12</code> heads. Each head processes a segment of the embeddings independently, capturing
-				different syntactic and semantic relationships. This design facilitates parallel learning of
-				diverse linguistic features, enhancing the model's representational power.
+				se dividen en varias heads: en el caso de GPT-2 (small), en
+				<code>12</code>. Cada head procesa un segmento de los embeddings de manera independiente y captura
+				relaciones sintácticas y semánticas distintas. Ese diseño facilita el aprendizaje en paralelo de
+				rasgos lingüísticos diversos y enriquece la capacidad representacional del modelo.
 			</p>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 3: Masked Self-Attention</h4>
+			<h4>Paso 3: self-attention enmascarada</h4>
 			<p>
-				In each head, we perform masked self-attention calculations. This mechanism allows the model
-				to generate sequences by focusing on relevant parts of the input while preventing access to
-				future tokens.
+				Dentro de cada head se hacen los cálculos de self-attention enmascarada. Ese mecanismo le
+				permite al modelo generar secuencias concentrándose en las partes relevantes de la entrada,
+				mientras le impide acceder a los tokens futuros.
 			</p>
 
 			<div class="figure">
 				<img src="./article_assets/attention.png" width="80%" align="middle" />
 			</div>
 			<div class="figure-caption">
-				Figure <span class="attention">3</span>. Using Query, Key, and Value matrices to calculate
-				masked self-attention.
+				Figura <span class="attention">3</span>. Uso de las matrices Query, Key y Value para
+				calcular la self-attention enmascarada.
 			</div>
 
 			<ul>
 				<li>
-					<strong>Dot Product</strong>: The dot product of
+					<strong>Producto punto</strong>: el producto punto entre las matrices
 					<span class="q-color">Query</span>
-					and <span class="k-color">Key</span> matrices determines the
-					<strong>attention score</strong>, producing a square matrix that reflects the relationship
-					between all input tokens.
+					y <span class="k-color">Key</span> determina el
+					<strong>puntaje de atención</strong>, y produce una matriz cuadrada que refleja la relación
+					entre todos los tokens de entrada.
 				</li>
 				<li>
-					<strong>Scaling · Mask</strong>: The attention scores are scaled and a mask is applied to
-					the upper triangle of the attention matrix to prevent the model from accessing future
-					tokens, setting these values to negative infinity. The model needs to learn how to predict
-					the next token without “peeking” into the future.
+					<strong>Escalado · máscara</strong>: los puntajes de atención se escalan y se aplica una
+					máscara al triángulo superior de la matriz de atención, poniendo esos valores en menos
+					infinito, para impedir que el modelo acceda a los tokens futuros. El modelo tiene que
+					aprender a predecir el token siguiente sin "espiar" hacia adelante.
 				</li>
 				<li>
-					<strong>Softmax · Dropout</strong>: After masking and scaling, the attention scores are
-					converted into probabilities by the softmax operation, then optionally regularized with
-					dropout. Each row of the matrix sums to one and indicates the relevance of every other
-					token to the left of it.
+					<strong>Softmax · dropout</strong>: después del enmascarado y el escalado, los puntajes de
+					atención se convierten en probabilidades con la operación softmax y, opcionalmente, se
+					regularizan con dropout. Cada fila de la matriz suma uno e indica la relevancia de cada uno
+					de los tokens que están a su izquierda.
 				</li>
 			</ul>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 4: Output and Concatenation</h4>
+			<h4>Paso 4: salida y concatenación</h4>
 			<p>
-				The model uses the masked self-attention scores and multiplies them with the
-				<span class="v-color">Value</span> matrix to get the
-				<span class="purple-color">final output</span>
-				of the self-attention mechanism. GPT-2 has <code>12</code> self-attention heads, each capturing
-				different relationships between tokens. The outputs of these heads are concatenated and passed
-				through a linear projection.
+				El modelo toma los puntajes de self-attention enmascarada y los multiplica por la matriz
+				<span class="v-color">Value</span> para obtener la
+				<span class="purple-color">salida final</span>
+				del mecanismo de self-attention. GPT-2 tiene <code>12</code> heads de self-attention, y cada una
+				captura relaciones distintas entre los tokens. Las salidas de esas heads se concatenan y pasan
+				por una proyección lineal.
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" id="article-activation" data-click="article-mlp">
-		<h3>MLP: Multi-Layer Perceptron</h3>
+		<h3>MLP: perceptrón multicapa</h3>
 
 		<div class="figure">
 			<img src="./article_assets/mlp.png" width="70%" align="middle" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">4</span>. Using MLP layer to project the self-attention
-			representations into higher dimensions to enhance the model's representational capacity.
+			Figura <span class="attention">4</span>. La capa MLP proyecta las representaciones de la
+			self-attention a dimensiones más altas para aumentar la capacidad representacional del modelo.
 		</div>
 
 		<p>
-			After the multiple heads of self-attention capture the diverse relationships between the input
-			tokens, the concatenated outputs are passed through the Multilayer Perceptron (MLP) layer to
-			enhance the model's representational capacity. The MLP block consists of two linear
-			transformations with a <a
+			Después de que las distintas heads de self-attention capturan las diversas relaciones entre los
+			tokens de entrada, las salidas concatenadas pasan por la capa de perceptrón multicapa (MLP)
+			para aumentar la capacidad representacional del modelo. El bloque MLP consiste en dos
+			transformaciones lineales con una función de activación
+			<a
 				href="https://en.wikipedia.org/wiki/Rectified_linear_unit#Gaussian-error_linear_unit_(GELU)"
 				>GELU</a
-			> activation function in between.
+			> en el medio.
 		</p>
 		<p>
-			The first linear transformation expands the dimensionality of the input four-fold from <code
+			La primera transformación lineal cuadruplica la dimensionalidad de la entrada, de <code
 				>768</code
 			>
-			to
-			<code>3072</code>. This expansion step allows the model to project the token representations
-			into a higher-dimensional space, where it can capture richer and more complex patterns that
-			may not be visible in the original dimension.
+			a
+			<code>3072</code>. Esa expansión le permite al modelo proyectar las representaciones de los
+			tokens a un espacio de mayor dimensión, donde puede capturar patrones más ricos y complejos que
+			quizá no sean visibles en la dimensión original.
 		</p>
 		<p>
-			The second linear transformation then reduces the dimensionality back to the original size of <code
+			La segunda transformación lineal reduce la dimensionalidad de vuelta al tamaño original de <code
 				>768</code
-			>.This compression step brings the representations back to a manageable size while retaining
-			the useful nonlinear transformations introduced in the expansion step.
+			>. Esa compresión devuelve las representaciones a un tamaño manejable, conservando las
+			transformaciones no lineales útiles que introdujo la expansión.
 		</p>
 		<p>
-			Unlike the self-attention mechanism, which integrates information across tokens, the MLP
-			processes tokens independently and simply maps each token representation from one space to
-			another, enriching the overall model capacity.
+			A diferencia del mecanismo de self-attention, que integra información entre tokens, el MLP
+			procesa cada token de manera independiente: simplemente mapea la representación de cada uno de
+			un espacio a otro, enriqueciendo la capacidad general del modelo.
 		</p>
 	</div>
 
 	<div class="article-section" id="article-prob" data-click="article-prob">
-		<h2>Output Probabilities</h2>
+		<h2>Probabilidades de salida</h2>
 		<p>
-			After the input has been processed through all Transformer blocks, the output is passed
-			through the final linear layer to prepare it for token prediction. This layer projects the
-			final representations into a <code>50,257</code>
-			dimensional space, where every token in the vocabulary has a corresponding value called
-			<code>logit</code>. Any token can be the next word, so this process allows us to simply rank
-			these tokens by their likelihood of being that next word. We then apply the softmax function
-			to convert the logits into a probability distribution that sums to one. This will allow us to
-			sample the next token based on its likelihood.
+			Después de que la entrada atravesó todos los bloques Transformer, la salida pasa por la capa
+			lineal final que la prepara para la predicción del token. Esa capa proyecta las
+			representaciones finales a un espacio de <code>50,257</code>
+			dimensiones, donde cada token del vocabulario tiene un valor asociado llamado
+			<code>logit</code>. Cualquier token puede ser la palabra siguiente, así que este proceso
+			permite ordenarlos según su verosimilitud de serlo. Después se aplica la función softmax para
+			convertir los logits en una distribución de probabilidad que suma uno, y eso permite muestrear
+			el token siguiente según su probabilidad.
 		</p>
 
 		<div class="figure py-5">
 			<img src="./article_assets/softmax.png" width="70%" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">5</span>. Each token in the vocabulary is assigned a
-			probability based on the model's output logits. These probabilities determine the likelihood
-			of each token being the next word in the sequence.
+			Figura <span class="attention">5</span>. A cada token del vocabulario se le asigna una
+			probabilidad a partir de los logits que produce el modelo. Esas probabilidades determinan qué
+			tan probable es que cada token sea la palabra siguiente de la secuencia.
 		</div>
 
 		<p id="article-temperature" data-click="article-temperature">
-			The final step is to generate the next token by sampling from this distribution The <code
-				>temperature</code
-			>
-			hyperparameter plays a critical role in this process. Mathematically speaking, it is a very simple
-			operation: model output logits are simply divided by the
+			El último paso es generar el token siguiente muestreando de esa distribución. El
+			hiperparámetro <code>temperature</code>
+			cumple un papel crítico. Matemáticamente es una operación muy simple: los logits que produce el
+			modelo se dividen por la
 			<code>temperature</code>:
 		</p>
 
 		<ul>
 			<li>
-				<code>temperature = 1</code>: Dividing logits by one has no effect on the softmax outputs.
+				<code>temperature = 1</code>: dividir los logits por uno no tiene ningún efecto sobre la
+				salida del softmax.
 			</li>
 			<li>
-				<code>temperature &lt; 1</code>: Lower temperature makes the model more confident and
-				deterministic by sharpening the probability distribution, leading to more predictable
-				outputs.
+				<code>temperature &lt; 1</code>: una temperatura baja vuelve al modelo más confiado y
+				determinista, porque afila la distribución de probabilidad y lleva a salidas más predecibles.
 			</li>
 			<li>
-				<code>temperature &gt; 1</code>: Higher temperature creates a softer probability
-				distribution, allowing for more randomness in the generated text – what some refer to as
-				model <em>“creativity”</em>.
+				<code>temperature &gt; 1</code>: una temperatura alta genera una distribución de
+				probabilidad más plana, lo que permite más azar en el texto generado: lo que algunos llaman
+				la <em>"creatividad"</em> del modelo.
 			</li>
 		</ul>
 
 		<p id="article-sampling" data-click="article-sampling">
-			In addition, the sampling process can be further refined using <code>top-k</code>
-			and
-			<code>top-p</code> parameters:
+			Además, el muestreo se puede refinar con los parámetros <code>top-k</code>
+			y
+			<code>top-p</code>:
 		</p>
 		<ul>
 			<li>
-				<code>top-k sampling</code>: Limits the candidate tokens to the top k tokens with the
-				highest probabilities, filtering out less likely options.
+				<code>muestreo top-k</code>: limita los tokens candidatos a los k de mayor probabilidad y
+				descarta las opciones menos probables.
 			</li>
 			<li>
-				<code>top-p sampling</code>: Considers the smallest set of tokens whose cumulative
-				probability exceeds a threshold p, ensuring that only the most likely tokens contribute
-				while still allowing for diversity.
+				<code>muestreo top-p</code>: considera el conjunto más chico de tokens cuya probabilidad
+				acumulada supera un umbral p, de modo que solo contribuyan los más probables sin perder
+				diversidad.
 			</li>
 		</ul>
 		<p>
-			By tuning <code>temperature</code>, <code>top-k</code>, and <code>top-p</code>, you can
-			balance between deterministic and diverse outputs, tailoring the model's behavior to your
-			specific needs.
+			Ajustando <code>temperature</code>, <code>top-k</code> y <code>top-p</code> se puede equilibrar
+			entre salidas deterministas y diversas, adaptando el comportamiento del modelo a cada
+			necesidad.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-advanced-features">
-		<h2>Auxiliary Architectural Features</h2>
+		<h2>Componentes arquitectónicos auxiliares</h2>
 
 		<p>
-			There are several auxiliary architectural features that enhance the performance of Transformer
-			models. While important for the model's overall performance, they are not as important for
-			understanding the core concepts of the architecture. Layer Normalization, Dropout, and
-			Residual Connections are crucial components in Transformer models, particularly during the
-			training phase. Layer Normalization stabilizes training and helps the model converge faster.
-			Dropout prevents overfitting by randomly deactivating neurons. Residual Connections allows
-			gradients to flow directly through the network and helps to prevent the vanishing gradient
-			problem.
+			Hay varios componentes auxiliares que mejoran el rendimiento de los Transformers. Son
+			importantes para el desempeño general del modelo, pero no tanto para entender los conceptos
+			centrales de la arquitectura. La normalización por capa, el dropout y las conexiones residuales
+			son piezas cruciales, sobre todo durante el entrenamiento. La normalización por capa estabiliza
+			el entrenamiento y ayuda a que el modelo converja más rápido. El dropout previene el
+			sobreajuste desactivando neuronas al azar. Las conexiones residuales permiten que los
+			gradientes fluyan directamente por la red y ayudan a evitar el problema del gradiente que se
+			desvanece.
 		</p>
 		<div class="article-subsection" id="article-ln">
-			<h3>Layer Normalization</h3>
+			<h3>Normalización por capa</h3>
 
 			<p>
-				Layer Normalization helps to stabilize the training process and improves convergence. It
-				works by normalizing the inputs across the features, ensuring that the mean and variance of
-				the activations are consistent. This normalization helps mitigate issues related to internal
-				covariate shift, allowing the model to learn more effectively and reducing the sensitivity
-				to the initial weights. Layer Normalization is applied twice in each Transformer block, once
-				before the self-attention mechanism and once before the MLP layer.
+				La normalización por capa ayuda a estabilizar el entrenamiento y mejora la convergencia.
+				Funciona normalizando las entradas a lo largo de las características, de modo que la media y
+				la varianza de las activaciones se mantengan consistentes. Esa normalización mitiga problemas
+				asociados al desplazamiento de covariables interno, le permite al modelo aprender con más
+				eficacia y reduce su sensibilidad a los pesos iniciales. Se aplica dos veces en cada bloque
+				Transformer: una antes del mecanismo de self-attention y otra antes de la capa MLP.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-dropout">
 			<h3>Dropout</h3>
 
 			<p>
-				Dropout is a regularization technique used to prevent overfitting in neural networks by
-				randomly setting a fraction of model weights to zero during training. This encourages the
-				model to learn more robust features and reduces dependency on specific neurons, helping the
-				network generalize better to new, unseen data. During model inference, dropout is
-				deactivated. This essentially means that we are using an ensemble of the trained
-				subnetworks, which leads to a better model performance.
+				El dropout es una técnica de regularización que previene el sobreajuste en redes neuronales
+				poniendo en cero, al azar, una fracción de los pesos del modelo durante el entrenamiento.
+				Eso lo empuja a aprender características más robustas y reduce la dependencia de neuronas
+				específicas, lo que ayuda a que la red generalice mejor a datos nuevos. Durante la
+				inferencia, el dropout está desactivado: en la práctica eso equivale a usar un ensamble de
+				las subredes entrenadas, lo que mejora el rendimiento del modelo.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-residual">
-			<h3>Residual Connections</h3>
+			<h3>Conexiones residuales</h3>
 
 			<p>
-				Residual connections were first introduced in the ResNet model in 2015. This architectural
-				innovation revolutionized deep learning by enabling the training of very deep neural
-				networks. Essentially, residual connections are shortcuts that bypass one or more layers,
-				adding the input of a layer to its output. This helps mitigate the vanishing gradient
-				problem, making it easier to train deep networks with multiple Transformer blocks stacked on
-				top of each other. In GPT-2, residual connections are used twice within each Transformer
-				block: once before the MLP and once after, ensuring that gradients flow more easily, and
-				earlier layers receive sufficient updates during backpropagation.
+				Las conexiones residuales se introdujeron por primera vez en el modelo ResNet, en 2015. Esa
+				innovación arquitectónica revolucionó el deep learning al hacer posible el entrenamiento de
+				redes neuronales muy profundas. En esencia, son atajos que saltean una o más capas y suman
+				la entrada de una capa a su salida. Eso mitiga el problema del gradiente que se desvanece y
+				facilita entrenar redes profundas con muchos bloques Transformer apilados. En GPT-2 se usan
+				dos veces dentro de cada bloque: una antes del MLP y otra después, para que los gradientes
+				fluyan con más facilidad y las capas tempranas reciban actualizaciones suficientes durante
+				la retropropagación.
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" data-click="article-interactive-features">
-		<h1>Interactive Features</h1>
+		<h1>Funciones interactivas</h1>
 		<p>
-			Transformer Explainer is built to be interactive and allows you to explore the inner workings
-			of the Transformer. Here are some of the interactive features you can play with:
+			Transformer Explainer está hecho para ser interactivo y permite explorar el funcionamiento
+			interno del Transformer. Estas son algunas de las cosas con las que se puede jugar:
 		</p>
 
 		<ul>
 			<li>
-				<strong>Input your own text sequence</strong> to see how the model processes it and predicts
-				the next word. Explore attention weights, intermediate computations, and see how the final output
-				probabilities are calculated.
+				<strong>Escribir una secuencia de texto propia</strong> para ver cómo el modelo la procesa y
+				predice la palabra siguiente. Se pueden explorar los pesos de atención, los cálculos intermedios
+				y ver cómo se calculan las probabilidades finales de salida.
 			</li>
 			<li>
-				<strong>Use temperature slider</strong> to control the randomness of the model’s predictions.
-				Explore how you can make the model output more deterministic or more creative by changing the
-				temperature value.
+				<strong>Usar el control de temperatura</strong> para regular el azar en las predicciones del
+				modelo. Permite explorar cómo volver la salida más determinista o más creativa cambiando el valor
+				de la temperatura.
 			</li>
 			<li>
-				<strong>Select top-k and top-p sampling methods</strong> to adjust sampling behavior during inference.
-				Experiment with different values and see how the probability distribution changes and influences
-				the model's predictions.
+				<strong>Elegir entre muestreo top-k y top-p</strong> para ajustar el comportamiento del muestreo
+				durante la inferencia. Se pueden probar distintos valores y ver cómo cambia la distribución de
+				probabilidad y cómo eso influye en las predicciones.
 			</li>
 			<li>
-				<strong>Interact with attention maps</strong> to see how the model focuses on different tokens
-				in the input sequence. Hover over tokens to highlight their attention weights and explore how
-				the model captures context and relationships between words.
+				<strong>Interactuar con los mapas de atención</strong> para ver en qué tokens de la secuencia
+				de entrada se concentra el modelo. Al pasar el mouse por encima de un token se resaltan sus pesos
+				de atención y se puede explorar cómo el modelo captura el contexto y las relaciones entre palabras.
 			</li>
 		</ul>
 	</div>
 
 	<div class="article-section" data-click="article-video">
-		<h2>Video Tutorial</h2>
+		<h2>Video tutorial</h2>
 		<div class="video-container">
 			<iframe
 				src="https://www.youtube.com/embed/ECR4oAwocjs"
@@ -544,30 +544,31 @@
 			>
 			</iframe>
 		</div>
+		<div class="figure-caption">El video tutorial original está en inglés.</div>
 	</div>
 
 	<div class="article-section" data-click="article-implementation">
-		<h2>How is Transformer Explainer Implemented?</h2>
+		<h2>¿Cómo está implementado Transformer Explainer?</h2>
 		<p>
-			Transformer Explainer features a live GPT-2 (small) model running directly in the browser.
-			This model is derived from the PyTorch implementation of GPT by Andrej Karpathy's
+			Transformer Explainer corre un modelo GPT-2 (small) en vivo directamente en el navegador. Ese
+			modelo deriva de la implementación en PyTorch del GPT de Andrej Karpathy, el
 			<a href="https://github.com/karpathy/nanoGPT" title="Github" target="_blank"
-				>nanoGPT project</a
-			>
-			and has been converted to
+				>proyecto nanoGPT</a
+			>, y fue convertido a
 			<a href="https://onnxruntime.ai/" title="ONNX" target="_blank">ONNX Runtime</a>
-			for seamless in-browser execution. The interface is built using JavaScript, with
+			para poder ejecutarse sin fricción dentro del navegador. La interfaz está hecha en JavaScript, con
 			<a href="https://kit.svelte.dev/" title="Svelte" target="_blank">Svelte</a>
-			as a front-end framework and
+			como framework de front-end y
 			<a href="https://d3js.org/" title="D3" target="_blank">D3.js</a>
-			for creating dynamic visualizations. Numerical values are updated live following the user input.
+			para las visualizaciones dinámicas. Los valores numéricos se actualizan en vivo a medida que cambia
+			la entrada del usuario.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-credit">
-		<h2>Who developed the Transformer Explainer?</h2>
+		<h2>¿Quién desarrolló Transformer Explainer?</h2>
 		<p>
-			Transformer Explainer was created by
+			Transformer Explainer fue creado por
 
 			<a href="https://aereeeee.github.io/" target="_blank">Aeree Cho</a>,
 			<a href="https://www.linkedin.com/in/chaeyeonggracekim/" target="_blank">Grace C. Kim</a>,
@@ -575,10 +576,10 @@
 			<a href="https://alechelbling.com/" target="_blank">Alec Helbling</a>,
 			<a href="https://zijie.wang/" target="_blank">Jay Wang</a>,
 			<a href="https://seongmin.xyz/" target="_blank">Seongmin Lee</a>,
-			<a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a>, and
+			<a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a> y
 			<a href="https://poloclub.github.io/polochau/" target="_blank">Polo Chau</a>
 
-			at the Georgia Institute of Technology.
+			en el Georgia Institute of Technology. Esta traducción al castellano no es obra de ellos.
 		</p>
 	</div>
 </div>

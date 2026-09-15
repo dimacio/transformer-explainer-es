@@ -15,7 +15,7 @@ Traducción al castellano de [**Transformer Explainer**](https://github.com/polo
 |---|---|
 | Tarjetas del manual (las 20 explicaciones guiadas) | Traducidas |
 | Etiquetas del diagrama, popovers y tooltips | Traducidas |
-| Artículo largo del pie de página (`Article.svelte`) | **En inglés**, sin traducir |
+| Artículo largo del pie de página (`Article.svelte`) | Traducido. Se conservan en inglés las fórmulas y el video tutorial embebido |
 | Fórmulas KaTeX (`Weights`, `Bias`, `Embedding`…) | **Sin traducir**, notación original |
 | El modelo | GPT-2 en inglés: las predicciones y los ejemplos precargados siguen siendo en inglés |
 
@@ -33,6 +33,7 @@ El registro es impersonal ("se puede ver", "conviene probar"), sin marca regiona
 - Se quitó el aviso de recolección de datos con fines de investigación y su enlace al formulario de consentimiento: corresponden al estudio de los autores originales, no a este fork.
 - Se eliminó el workflow `sync.yml`, que sincronizaba a diario con upstream y habría sobrescrito la traducción.
 - `paths.base` apunta a `/transformer-explainer-es`.
+- Se reactivaron los dos popovers de ayuda de **temperatura** y **estrategia de muestreo** (comentados en el original), con su botón "Leer más" al artículo. Se quitó el enlace al manual externo en inglés (`transformer-explainer.github.io/textbook`), que no se renderizaba.
 
 ## Cómo correrlo localmente
 
