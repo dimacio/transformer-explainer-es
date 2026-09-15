@@ -38,7 +38,7 @@
 	import { fetchAndMergeChunks } from '~/utils/fetchChunks';
 	import WeightPopovers from '~/components/WeightPopovers.svelte';
 	import { fade } from 'svelte/transition';
-	import { AutoTokenizer } from '@xenova/transformers';
+	import { AutoTokenizer, env } from '@xenova/transformers';
 	import { ex0, ex1, ex2, ex3, ex4 } from '~/constants/examples';
 	import BlockTransition from '~/components/BlockTransition.svelte';
 	import QKV from '~/components/QKV.svelte';
@@ -46,6 +46,11 @@
 
 	ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.0/dist/';
 	ort.env.logLevel = 'error';
+
+	// El tokenizador de GPT-2 se sirve desde el propio sitio (static/models/Xenova/gpt2).
+	// Sin esto, transformers.js lo busca en /models/ en la raiz del dominio, recibe 404
+	// y recien entonces lo baja del Hub de Hugging Face en cada carga.
+	env.localModelPath = `${base}/models/`;
 
 	let active = false;
 	let appStartTime = Date.now();
